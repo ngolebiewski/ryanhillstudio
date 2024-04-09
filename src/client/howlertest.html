@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howler.js Test</title>
+  <!-- Include Howler.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+  <button id="playButton">Play Sound</button>
+
+  <script>
+    // Get a reference to the play button
+    const playButton = document.getElementById('playButton');
+
+    // Define the audio file URL
+    const audioFileUrl = 'assets/sounds/site/Moog_FX_28.wav';
+
+    // Create a new Howl instance
+    const sound = new Howl({
+      src: [audioFileUrl],
+      volume: 1.0,
+      onplayerror: (error) => {
+        console.error('Error playing sound:', error);
+      }
+    });
+
+    // Add click event listener to play button
+    playButton.addEventListener('click', () => {
+      sound.play();
+    });
+  </script>
+</body>
+</html>
