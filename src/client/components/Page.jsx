@@ -55,7 +55,8 @@ const Page = ({ parentPage, setParentPage }) => {
             </div>
           ))
         ) : (
-          <h1>Images Loading...</h1>
+          // <h1>Images Loading...</h1>
+          <></>
         )}
       </div>
     </>
