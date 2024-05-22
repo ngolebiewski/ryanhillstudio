@@ -16,12 +16,12 @@ function App() {
       <ArtMenu parentPage={parentPage} setParentPage={setParentPage} />
       <Routes>
         <Route path="/" element={<Page parentPage={"home"} setParentPage={setParentPage} />} />
-        <Route path="/ryan-hill" element={<Page parentPage={parentPage} setParentPage={setParentPage} />} />
-        <Route path="/drawing" element={<Page parentPage={parentPage} setParentPage={setParentPage} />} />
-        <Route path="/installation" element={<Page parentPage="installation" setParentPage={setParentPage} />} />
-        <Route path="/studio" element={<Page parentPage="studio" setParentPage={setParentPage} />} />
-        <Route path="/events" element={<Page parentPage="events" setParentPage={setParentPage} />} />
-        <Route path="/contact" element={<Page parentPage="contact" setParentPage={setParentPage} />} />
+        <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />
+        <Route path="/drawing" element={<Page parentPage={"drawing"} setParentPage={setParentPage} />} />
+        <Route path="/installation" element={<Page parentPage={"installation"} setParentPage={setParentPage} />} />
+        <Route path="/studio" element={<Page parentPage={"studio"} setParentPage={setParentPage} />} />
+        <Route path="/events" element={<Page parentPage={"events"} setParentPage={setParentPage} />} />
+        <Route path="/contact" element={<Page parentPage={"contact"} setParentPage={setParentPage} />} />
       </Routes>
       <Footer />
     </>
