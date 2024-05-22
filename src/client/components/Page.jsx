@@ -43,7 +43,7 @@ const Page = ({ parentPage, setParentPage }) => {
 
   return (
     <>
-      <h5>This is the curent "parent" page: {parentPage.toUpperCase()}</h5>
+      <h5>This is the current page: {parentPage.toUpperCase()}</h5>
       <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
       <div>
         {pageImages.length > 0 ? (
