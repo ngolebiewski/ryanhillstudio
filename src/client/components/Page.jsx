@@ -46,14 +46,17 @@ const Page = ({ parentPage, setParentPage }) => {
       <h5>This is the curent "parent" page: {parentPage.toUpperCase()}</h5>
       <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
       <div>
-        {pageImages.length > 0 && <h1>IMAGES</h1>}
-        {pageImages.map((pic) => (
-          <div key={pic.id}>
-            <img src={pic.link} alt={pic.alt_text} style={{ maxHeight: "50vh" }} />
-            <p>{pic.title.rendered}</p>
-            <div dangerouslySetInnerHTML={{ __html: pic.caption.rendered }} />
-          </div>
-        ))}
+        {pageImages.length > 0 ? (
+          pageImages.map((pic) => (
+            <div key={pic.id} >
+              <img key={pic.id} src={pic.link} alt={pic.alt_text} style={{ maxHeight: "50vh" }} />
+              <p>{pic.title.rendered}</p>
+              <div dangerouslySetInnerHTML={{ __html: pic.caption.rendered }} />
+            </div>
+          ))
+        ) : (
+          <h1>Images Loading...</h1>
+        )}
       </div>
     </>
   )

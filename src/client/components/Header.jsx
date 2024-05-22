@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header>
-      <h1 className="courier-prime-regular">Ryan Hill Studio</h1>
+      <Link to="/" onClick={() => setParentPage("home")}><h1 className="courier-prime-regular">Ryan Hill Studio</h1></Link>
+      
     </header>
   )
 }

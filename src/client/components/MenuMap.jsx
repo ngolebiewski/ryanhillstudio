@@ -2,7 +2,7 @@ const MenuMap = () => {
 
   return (
     <>
-      <img src="https://www.ryanhill.studio/wp-content/uploads/2024/05/Screenshot-2024-05-09-at-5.16.40-PM.jpg" />
+      <img src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg" style={{ maxHeight: "75vh" }}/>
     </>
   )
 }
