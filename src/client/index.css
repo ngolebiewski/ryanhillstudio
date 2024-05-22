@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  border: 1px dotted magenta;
+  /* border: 1px dashed magenta; */
 }
 
 body{
@@ -15,12 +15,17 @@ body{
   align-items: center; */
 }
 
+#menu {
+  border: 1px solid black;
+  margin: 10px;
+
+}
 h1{
-  font-size: 2vh;
+  font-size: 3vh;
 }
 
 header>h1{
-  font-size: 2vh;
+  font-size: 4vh;
   /* align-items: center;
   text-align: center; */
 }
