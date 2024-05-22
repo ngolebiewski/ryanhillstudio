@@ -4,7 +4,7 @@ import ViteExpress from "vite-express";
 const app = express();
 
 app.get("/hello", (req, res) => {
-  res.send("Hello Vite + React!");
+  res.send("Hello Ryan Hill Studio");
 });
 
 ViteExpress.listen(app, 8000, () =>
