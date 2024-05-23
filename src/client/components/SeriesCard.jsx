@@ -31,14 +31,14 @@ const SeriesCard = ({ seriesData }) => {
 
   return (
     <>
-      <h1>{seriesData.slug.toUpperCase()}</h1>
+      <h1>{seriesData.slug.toUpperCase().replaceAll("-"," ")}</h1>
       {featuredImage ? (
         <img className="series-card-image" src={featuredImage.url} alt={featuredImage.alt_text} />
       ) : (
         <h1>Featured Image Loading...</h1>
       )}
 
-      <p>{seriesData.featured_media}</p>
+      <p>Image number: {seriesData.featured_media}</p>
     </>
   )
 }

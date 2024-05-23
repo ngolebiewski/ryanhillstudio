@@ -67,12 +67,12 @@ const Page = ({ parentPage, setParentPage }) => {
         {childPages.length > 0 ? (
           childPages.map((seriesData) => (
             <div key={seriesData.id} className="series-card">
-            <SeriesCard  seriesData={seriesData} />
+            <SeriesCard seriesData={seriesData} />
             </div>
           ))
           
           ) : (
-          <h1>No FORMS</h1>
+          <h1>Loading the series from this project...</h1>
         )}
       </div>
 
