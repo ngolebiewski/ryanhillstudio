@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SeriesCard from "./SeriesCard";
 
 const Page = ({ parentPage, setParentPage }) => {
   const baseURL = import.meta.env.VITE_API;
@@ -34,7 +35,8 @@ const Page = ({ parentPage, setParentPage }) => {
       try {
         const { data } = await axios.get(`${baseURL}/pages?parent=${pageData.id}`);
         setChildPages(data);
-        console.log(`Child Pages Fetched: ${JSON.stringify(data)}`);
+        console.log(`Child Pages Fetched:`);
+        console.log({ data })
       } catch (error) {
         console.error("Error fetching children page data", error);
       }
@@ -60,6 +62,21 @@ const Page = ({ parentPage, setParentPage }) => {
     <>
       <h5>This is the current page: {parentPage.toUpperCase()}</h5>
       <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
+
+      <div>
+        {childPages.length > 0 ? (
+          childPages.map((seriesData) => (
+            <div key={seriesData.id} className="series-card">
+            <SeriesCard  seriesData={seriesData} />
+            </div>
+          ))
+          
+          ) : (
+          <h1>No FORMS</h1>
+        )}
+      </div>
+
+
       <div>
         {pageImages.length > 0 ? (
           pageImages.map((pic) => (

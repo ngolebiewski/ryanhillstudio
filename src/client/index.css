@@ -62,3 +62,11 @@ footer {
   bottom: 0;
   width: 100%; /* Assuming full width */
 }
+
+.series-card {
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  max-width: 400px;
+}
