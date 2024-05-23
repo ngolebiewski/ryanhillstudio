@@ -3,7 +3,7 @@ import MenuMap from "./MenuMap"
 const Home = ({ parentPage, setParentPage }) => {
   return(
     <>
-      <MenuMap />
+      <MenuMap setParentPage={setParentPage} />
     </>
   )
 }

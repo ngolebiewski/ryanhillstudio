@@ -6,7 +6,7 @@ Work-in-progress Deployment: https://ryanhillstudio.netlify.app/
 Future Permanent Location: https://www.ryanhill.studio/
 Seperate WordPress Installation to use as API: https://api.ryanhill.studio/wp-json
 
-### Tech
+# Tech
 - React
 - Tailwind CSS
 - Ant Design
@@ -25,3 +25,6 @@ Seperate WordPress Installation to use as API: https://api.ryanhill.studio/wp-js
 - Direction: low tech == use old technology, clunky on purpose
 
 ![Ryan Hill Menu Doodle](/public/images/site/menu/ryan_menu_01.jpg)
+
+# Process
+- Image mapping for a hand-drawn navigation menu. Using https://www.image-map.net/ to get a polygonal map.
