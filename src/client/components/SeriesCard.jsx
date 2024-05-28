@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SeriesPage from "./SeriesPage";
 
-const SeriesCard = ({ seriesData }) => {
+const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
 
 
   const [featuredImage, setFeaturedImage] = useState({})
@@ -26,11 +27,14 @@ const SeriesCard = ({ seriesData }) => {
     }
   }, [seriesData]);
 
-
-
+  const handleSeriesClick = () => {
+    setSeriesFocus(seriesData.slug);
+    console.log(seriesFocus);
+    // navigate(`/series/${seriesData.slug}`);
+  };
 
   return (
-    <>
+    <div onClick={handleSeriesClick}>
       <h1>{seriesData.slug.toUpperCase().replaceAll("-"," ")}</h1>
       {featuredImage ? (
         <img className="series-card-image" src={featuredImage.url} alt={featuredImage.alt_text} />
@@ -39,7 +43,8 @@ const SeriesCard = ({ seriesData }) => {
       )}
 
       <p>Image number: {seriesData.featured_media}</p>
-    </>
+      {/* {seriesFocus===seriesData.slug? <SeriesPage /> : null} */}
+    </div>
   )
 }
 

@@ -1,9 +1,9 @@
-const SeriesPage = () => {
+const SeriesPage = ({ seriesFocus }) => {
+  console.log(`series page focus: ${seriesFocus}`)
   return (
     <>
-      <h1>This is where you'll get the images from each series.
-        Series Description.
-        Each Image.
+      <h1>This is the SERIES PAGE.<br />
+        {seriesFocus}
       </h1>
     </>
   )

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SeriesCard from "./SeriesCard";
+import SeriesPage from "./SeriesPage";
 
 const Page = ({ parentPage, setParentPage }) => {
   const baseURL = import.meta.env.VITE_API;
@@ -8,6 +9,8 @@ const Page = ({ parentPage, setParentPage }) => {
   const [pageDescription, setPageDescription] = useState("Loading...");
   const [pageImages, setPageImages] = useState([]);
   const [childPages, setChildPages] = useState([]); //each an object
+  const [seriesFocus, setSeriesFocus] = useState(); //slug for selected button i.e. "works-on-paper"
+  const [seriesArtworks, setSeriesArtworks]= useState([]); //stores all the images plus descriptive text in a series 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +70,7 @@ const Page = ({ parentPage, setParentPage }) => {
         {childPages.length > 0 ? (
           childPages.map((seriesData) => (
             <div key={seriesData.id} className="series-card">
-            <SeriesCard seriesData={seriesData} />
+            <SeriesCard seriesData={seriesData} seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus}/>
             </div>
           ))
           
@@ -76,6 +79,9 @@ const Page = ({ parentPage, setParentPage }) => {
         )}
       </div>
 
+      <div>
+        <SeriesPage seriesFocus={seriesFocus}/>
+      </div>
 
       <div>
         {pageImages.length > 0 ? (
