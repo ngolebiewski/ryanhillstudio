@@ -82,7 +82,7 @@ const Page = ({ parentPage, setParentPage }) => {
       <div>
         <SeriesPage seriesFocus={seriesFocus}/>
       </div>
-
+{/* 
       <div>
         {pageImages.length > 0 ? (
           pageImages.map((pic) => (
@@ -95,7 +95,7 @@ const Page = ({ parentPage, setParentPage }) => {
         ) : (
           <></>
         )}
-      </div>
+      </div> */}
     </>
   );
 };
