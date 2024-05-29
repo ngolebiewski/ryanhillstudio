@@ -25,8 +25,6 @@ const SeriesPage = ({ seriesFocus }) => {
           const aNum = aMatch ? parseInt(aMatch[1], 10) : 0;
           const bNum = bMatch ? parseInt(bMatch[1], 10) : 0;
 
-          console.log(aNum, bNum);
-
           return aNum - bNum;
         });
 
@@ -54,7 +52,7 @@ const SeriesPage = ({ seriesFocus }) => {
         {seriesImages ?
           <div>
             {console.log("i just got the fetched the images", seriesImages)}
-            <h2>Here are the images within the {seriesFocus} page:</h2>
+            {/* <h2>Here are the images within the {seriesFocus} page:</h2> */}
             {seriesImages.map((artwork) => (
               <div key={artwork.id}>
                 <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />

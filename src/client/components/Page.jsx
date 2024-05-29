@@ -76,7 +76,8 @@ const Page = ({ parentPage, setParentPage }) => {
           ))
           
           ) : (
-          <h1>Loading the series from this project...</h1>
+          // <h1>Loading the series from this project...</h1>
+          null
         )}
       </div>
 
@@ -98,7 +99,7 @@ const Page = ({ parentPage, setParentPage }) => {
         )}
       </div> */}
 
-      {parentPage==='contact'? <ContactForm />: null}
+      {parentPage==='contact'? <div><h1>Contact</h1><ContactForm /></div>: null}
     </>
   );
 };

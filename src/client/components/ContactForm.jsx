@@ -31,7 +31,7 @@ const ContactForm = () => {
       form={form}
       layout="vertical"
       onFinish={handleSubmit}
-      className="series-card"
+      className="series-card contact"
     >
       <Form.Item
         label="Email"
