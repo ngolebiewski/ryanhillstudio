@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SeriesCard from "./SeriesCard";
 import SeriesPage from "./SeriesPage";
+import ContactForm from "./ContactForm";
 
 const Page = ({ parentPage, setParentPage }) => {
   const baseURL = import.meta.env.VITE_API;
@@ -96,6 +97,8 @@ const Page = ({ parentPage, setParentPage }) => {
           <></>
         )}
       </div> */}
+
+      {parentPage==='contact'? <ContactForm />: null}
     </>
   );
 };
