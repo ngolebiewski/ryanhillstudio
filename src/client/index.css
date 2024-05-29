@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  /* border: 1px dashed magenta; */
+  /* border: px dashed magenta; */
   font-family: "Courier Prime", Courier, 'Courier New', monospace;
 }
 

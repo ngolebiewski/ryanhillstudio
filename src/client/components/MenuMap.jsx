@@ -67,7 +67,8 @@ const MenuMap = () => {
 
   return (
     <>    
-      <img 
+      {percentageCoords?
+      <><img 
         ref={imgRef}
         src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg" 
         useMap="#image-map" 
@@ -82,7 +83,8 @@ const MenuMap = () => {
         <area target="" alt="Studio" title="Studio" href="studio" coords={percentageCoords.studio} shape="poly" />
         <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" />
       </map>
-      {    console.log(imageSize)}
+      {console.log(imageSize)}</>
+      : null }
     </>
   );
 };
