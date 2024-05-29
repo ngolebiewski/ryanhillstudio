@@ -18,6 +18,7 @@ const MenuMap = () => {
     getImageDimensions();
   }, []);
 
+
   useEffect(() => {
     const updateImageSize = () => {
       if (imgRef.current) {
@@ -37,14 +38,16 @@ const MenuMap = () => {
   }, []);
 
   useEffect(() => {
+    const imageRatio = imageSize.width / imageDimensions.width
+    console.log("image ratio: ", imageRatio)
     const generatePercentageCoords = (coords) => {
       return coords.map((coord, index) => {
         if (index % 2 === 0) {
           // X-coordinate
-          return (coord / imageDimensions.width) * 100;
+          return (coord * imageRatio);
         } else {
           // Y-coordinate
-          return (coord / imageDimensions.height) * 100;
+          return (coord * imageRatio);
         }
       });
     };
@@ -57,7 +60,7 @@ const MenuMap = () => {
       studio: generatePercentageCoords([109,1786,212,1801,342,1830,459,1747,579,1757,675,1742,841,1735,897,1794,1052,1784,1282,1796,1473,1681,1438,1598,1245,1529,895,1524,758,1487,415,1465,368,1522,293,1492,182,1625,114,1595]),
       contact: generatePercentageCoords([104,2127,288,2131,452,2087,706,2163,1629,2104,1730,2131,1867,2007,1769,1749,1461,1718,1301,1798,885,1806,839,1747,650,1754,567,1776,474,1757,342,1840,219,1813,165,1825])
     });
-  }, [imageDimensions]);
+  }, [imageSize, imageDimensions]);
 
   return (
     <>    
