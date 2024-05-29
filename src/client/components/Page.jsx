@@ -67,7 +67,7 @@ const Page = ({ parentPage, setParentPage }) => {
       <h5>This is the current page: {parentPage.toUpperCase()}</h5>
       <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
 
-      <div>
+      <div className="series-section">
         {childPages.length > 0 ? (
           childPages.map((seriesData) => (
             <div key={seriesData.id} className="series-card">
