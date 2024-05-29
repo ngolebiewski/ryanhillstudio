@@ -37,6 +37,9 @@ const MenuMap = () => {
     };
   }, []);
 
+  //use https://www.image-map.net/ to make poly map of image
+  //this is for square format images
+  
   useEffect(() => {
     const imageRatio = imageSize.width / imageDimensions.width
     console.log("image ratio: ", imageRatio)

@@ -56,7 +56,7 @@ const SeriesPage = ({ seriesFocus }) => {
             {seriesImages.map((artwork) => (
               <div key={artwork.id}>
                 <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />
-                <p>{artwork.title.rendered}</p>
+                <p className="courier-prime-regular-italic">{artwork.title.rendered}</p>
                 <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
               </div>
 
