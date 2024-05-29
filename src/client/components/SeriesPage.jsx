@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-//seriesFocus is the slug for the series name, i.e. "works-on-paper"
+//seriesFocus is the slug for the series name, i.e. "sketches"
 const SeriesPage = ({ seriesFocus }) => {
   const baseURL = import.meta.env.VITE_API;
   const [seriesImages, setSeriesImages] = useState(null);
@@ -13,6 +13,24 @@ const SeriesPage = ({ seriesFocus }) => {
       try {
         console.log(`${baseURL}/media?search=series-${seriesFocus}`)
         const { data } = await axios.get(`${baseURL}/media?search=series-${seriesFocus}`);
+
+        // Sort data based on number after series name within the description, i.e. "series-sketches-10" vs. "series-sketches-20"
+        const regex = new RegExp(`series-${seriesFocus}-(\\d+)[^0-9]`);
+
+        // Sort data based on the number extracted from the description using Regular Expressions
+        data.sort((a, b) => {
+          const aMatch = a.description.rendered.match(regex);
+          const bMatch = b.description.rendered.match(regex);
+
+          const aNum = aMatch ? parseInt(aMatch[1], 10) : 0;
+          const bNum = bMatch ? parseInt(bMatch[1], 10) : 0;
+
+          console.log(aNum, bNum);
+
+          return aNum - bNum;
+        });
+
+
         setSeriesImages(data)
       } catch (error) {
         console.error("Error obtaining images from the server.", error);
@@ -21,6 +39,8 @@ const SeriesPage = ({ seriesFocus }) => {
 
     fetchImages();
   }, [seriesFocus])
+
+
 
   useEffect(() => {
     // Reset the seriesImages state to null when location changes
