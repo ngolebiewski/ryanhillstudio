@@ -20,9 +20,19 @@ const MenuMap = () => {
   const [percentageCoords, setPercentageCoords] = useState([]);
   const [isSoundOn, setIsSoundOn] = useState(false);
 
-  const handleAreaMouseOver = (soundKey) => {
-    console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}`);
-    if (isSoundOn && sounds[soundKey]) {
+  // const handleAreaMouseOver = (soundKey) => {
+  //   console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}`);
+  //   if (isSoundOn && sounds[soundKey]) {
+  //     // Ensure the AudioContext is resumed
+  //     Howler.ctx.resume().then(() => {
+  //       sounds[soundKey].play();
+  //     });
+  //   }
+  // };
+
+  const handleAreaMouseOver = (soundKey, pressure = 0.1) => {
+    console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}, Pressure: ${pressure}`);
+    if (isSoundOn && sounds[soundKey] && pressure < 0.5) {
       // Ensure the AudioContext is resumed
       Howler.ctx.resume().then(() => {
         sounds[soundKey].play();
@@ -98,6 +108,12 @@ const MenuMap = () => {
     });
   }, [imageSize, imageDimensions]);
 
+  const handlePointerDown = (event, soundKey) => {
+    if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+      handleAreaMouseOver(soundKey, event.pressure);
+    }
+  };
+
   return (
     <>
       {/* <button onClick={() => toggleSound()}>
@@ -122,8 +138,8 @@ const MenuMap = () => {
 
       {(percentageCoords && imageSize.width > 0) ?
         <map name="image-map">
-          <area target="" alt="Ryan Hill" title="Ryan Hill" href="ryan-hill" coords={percentageCoords.ryanHill} shape="poly" onClick={() => handleAreaMouseOver('ryanHill')} onMouseOver={() => handleAreaMouseOver('ryanHill')} onTouchStart={() => handleAreaMouseOver('ryanHill')} />
-          <area target="" alt="Drawing" title="Drawing" href="drawing" coords={percentageCoords.drawing} shape="poly" onMouseOver={() => handleAreaMouseOver('drawing')} ontouchStart={() => handleAreaMouseOver('drawing')}/>
+          <area target="" alt="Ryan Hill" title="Ryan Hill" href="ryan-hill" coords={percentageCoords.ryanHill} shape="poly" onClick={() => handleAreaMouseOver('ryanHill')} onMouseOver={() => handleAreaMouseOver('ryanHill')} onPointerDown={(e) => handlePointerDown(e, 'ryanHill')} />
+          <area target="" alt="Drawing" title="Drawing" href="drawing" coords={percentageCoords.drawing} shape="poly" onMouseOver={() => handleAreaMouseOver('drawing')} onTouchStart={() => handleAreaMouseOver('drawing')}/>
           <area target="" alt="Installation" title="Installation" href="installation" coords={percentageCoords.installation} shape="poly" onMouseOver={() => handleAreaMouseOver('installation')}/>
           <area target="" alt="Events" title="Events" href="events" coords={percentageCoords.events} shape="poly" onMouseOver={() => handleAreaMouseOver('events')}/>
           <area target="" alt="Studio" title="Studio" href="studio" coords={percentageCoords.studio} shape="poly" onMouseOver={() => handleAreaMouseOver('studio')}/>
