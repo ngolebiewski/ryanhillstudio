@@ -42,7 +42,7 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
         <h1>Featured Image Loading...</h1>
       )}
 
-      <p>Image number: {seriesData.featured_media}</p>
+      {/* <p>Image number: {seriesData.featured_media}</p> */}
       {/* {seriesFocus===seriesData.slug? <SeriesPage /> : null} */}
     </div>
   )

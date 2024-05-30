@@ -85,7 +85,7 @@ const MenuMap = () => {
 
   useEffect(() => {
     const imageRatio = imageSize.width / imageDimensions.width
-    console.log("image ratio: ", imageRatio)
+    // console.log("image ratio: ", imageRatio)
     const generatePercentageCoords = (coords) => {
       return coords.map((coord, index) => {
         if (index % 2 === 0) {
@@ -158,7 +158,7 @@ const MenuMap = () => {
           <area target="" alt="Events" title="Events" href="events" coords={percentageCoords.events} shape="poly" onMouseOver={() => handleAreaMouseOver('events')}/>
           <area target="" alt="Studio" title="Studio" href="studio" coords={percentageCoords.studio} shape="poly" onMouseOver={() => handleAreaMouseOver('studio')}/>
           <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" onMouseOver={() => handleAreaMouseOver('contact')} onPointerEnter={() => handleAreaMouseOver('contact')}/>
-          {console.log(imageSize)}
+          {/* {console.log(imageSize)} */}
         </map>
 
         : null}
