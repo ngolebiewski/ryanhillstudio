@@ -111,8 +111,26 @@ const MenuMap = () => {
   const handlePointerDown = (event, soundKey) => {
     if (event.pointerType === 'touch' || event.pointerType === 'pen') {
       handleAreaMouseOver(soundKey, event.pressure);
+
+      let holdTimer = setTimeout(() => {
+        console.log(`Hold detected on ${soundKey}`);
+        if (isSoundOn && sounds[soundKey]) {
+          Howler.ctx.resume().then(() => {
+            sounds[soundKey].play();
+          });
+        }
+      }, 1000); // Hold duration set to 1000 ms (1 second)
+
+      const clearHoldTimer = () => {
+        clearTimeout(holdTimer);
+      };
+
+      event.target.addEventListener('pointerup', clearHoldTimer, { once: true });
+      event.target.addEventListener('pointercancel', clearHoldTimer, { once: true });
+      event.target.addEventListener('pointermove', clearHoldTimer, { once: true });
     }
   };
+
 
   return (
     <>
@@ -128,7 +146,6 @@ const MenuMap = () => {
         />
       </Tooltip>
 
- 
       <img
         ref={imgRef}
         src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg"
