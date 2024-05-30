@@ -134,9 +134,6 @@ const MenuMap = () => {
 
   return (
     <>
-      {/* <button onClick={() => toggleSound()}>
-        {!isSoundOn ? 'Sound Off' : 'Sound On'}
-      </button> */}
 
       <Tooltip title="Sound on/off">
         <Button
@@ -160,7 +157,7 @@ const MenuMap = () => {
           <area target="" alt="Installation" title="Installation" href="installation" coords={percentageCoords.installation} shape="poly" onMouseOver={() => handleAreaMouseOver('installation')}/>
           <area target="" alt="Events" title="Events" href="events" coords={percentageCoords.events} shape="poly" onMouseOver={() => handleAreaMouseOver('events')}/>
           <area target="" alt="Studio" title="Studio" href="studio" coords={percentageCoords.studio} shape="poly" onMouseOver={() => handleAreaMouseOver('studio')}/>
-          <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" onMouseOver={() => handleAreaMouseOver('contact')}/>
+          <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" onMouseOver={() => handleAreaMouseOver('contact')} onPointerEnter={() => handleAreaMouseOver('contact')}/>
           {console.log(imageSize)}
         </map>
 
