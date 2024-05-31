@@ -20,20 +20,9 @@ const MenuMap = () => {
   const [percentageCoords, setPercentageCoords] = useState([]);
   const [isSoundOn, setIsSoundOn] = useState(false);
 
-  // const handleAreaMouseOver = (soundKey) => {
-  //   console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}`);
-  //   if (isSoundOn && sounds[soundKey]) {
-  //     // Ensure the AudioContext is resumed
-  //     Howler.ctx.resume().then(() => {
-  //       sounds[soundKey].play();
-  //     });
-  //   }
-  // };
-
   const handleAreaMouseOver = (soundKey, pressure = 0.1) => {
-    console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}, Pressure: ${pressure}`);
+    // console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}, Pressure: ${pressure}`);
     if (isSoundOn && sounds[soundKey] && pressure < 0.5) {
-      // Ensure the AudioContext is resumed
       Howler.ctx.resume().then(() => {
         sounds[soundKey].play();
       });
