@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DateFormatter from "./DateFormatter"
 
 const Studio = ({ parentPage }) => {
   const baseURL = import.meta.env.VITE_API;
@@ -54,7 +55,7 @@ const Studio = ({ parentPage }) => {
             {posts.map((post) => (
               <div key={post.id} className="series-card contact">
                 <h1>{post.title.rendered}</h1>
-                <h5>{post.date}</h5>
+                <h5> <DateFormatter dateString={post.date} /></h5>
                 <br />
                 <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
                 {post.featImg.imageURL && (
