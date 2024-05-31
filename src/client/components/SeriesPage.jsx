@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 //seriesFocus is the slug for the series name, i.e. "sketches"
-const SeriesPage = ({ seriesFocus, description }) => {
+const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
   const baseURL = import.meta.env.VITE_API;
   const [seriesImages, setSeriesImages] = useState(null);
   const location = useLocation();
@@ -41,6 +41,8 @@ const SeriesPage = ({ seriesFocus, description }) => {
     // Reset the seriesImages state to null when location changes
     console.log(location.pathname)
     setSeriesImages(null);
+    setSeriesFocus(null);
+    description=null;
   }, [location]);
 
   return (
@@ -48,7 +50,6 @@ const SeriesPage = ({ seriesFocus, description }) => {
       <div>
       <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
         <div dangerouslySetInnerHTML={{ __html: description }} />
-        {console.log(description)}
         {seriesImages ?
           <div>
             {console.log("i just got the fetched the images", seriesImages)}
