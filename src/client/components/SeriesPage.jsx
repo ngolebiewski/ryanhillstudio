@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 //seriesFocus is the slug for the series name, i.e. "sketches"
-const SeriesPage = ({ seriesFocus }) => {
+const SeriesPage = ({ seriesFocus, description }) => {
   const baseURL = import.meta.env.VITE_API;
   const [seriesImages, setSeriesImages] = useState(null);
   const location = useLocation();
@@ -14,10 +14,9 @@ const SeriesPage = ({ seriesFocus }) => {
         console.log(`${baseURL}/media?search=series-${seriesFocus}`)
         const { data } = await axios.get(`${baseURL}/media?search=series-${seriesFocus}`);
 
-        // Sort data based on number after series name within the description, i.e. "series-sketches-10" vs. "series-sketches-20"
+        // Sort data based on number after series name within the media description, i.e. "series-sketches-10" vs. "series-sketches-20"
         const regex = new RegExp(`series-${seriesFocus}-(\\d+)[^0-9]`);
 
-        // Sort data based on the number extracted from the description using Regular Expressions
         data.sort((a, b) => {
           const aMatch = a.description.rendered.match(regex);
           const bMatch = b.description.rendered.match(regex);
@@ -27,7 +26,6 @@ const SeriesPage = ({ seriesFocus }) => {
 
           return aNum - bNum;
         });
-
 
         setSeriesImages(data)
       } catch (error) {
@@ -39,7 +37,6 @@ const SeriesPage = ({ seriesFocus }) => {
   }, [seriesFocus])
 
 
-
   useEffect(() => {
     // Reset the seriesImages state to null when location changes
     console.log(location.pathname)
@@ -49,6 +46,9 @@ const SeriesPage = ({ seriesFocus }) => {
   return (
     <>
       <div>
+      <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
+        <div dangerouslySetInnerHTML={{ __html: description }} />
+        {console.log(description)}
         {seriesImages ?
           <div>
             {console.log("i just got the fetched the images", seriesImages)}

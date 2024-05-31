@@ -11,7 +11,8 @@ const Page = ({ parentPage, setParentPage }) => {
   const [pageImages, setPageImages] = useState([]);
   const [childPages, setChildPages] = useState([]); //each an object
   const [seriesFocus, setSeriesFocus] = useState(); //slug for selected button i.e. "works-on-paper"
-  const [seriesArtworks, setSeriesArtworks]= useState([]); //stores all the images plus descriptive text in a series 
+  const [seriesArtworks, setSeriesArtworks] = useState([]); //stores all the images plus descriptive text in a series 
+  const [seriesDescription, setSeriesDescription] = useState({}); //make hash table for series descriptions
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +51,35 @@ const Page = ({ parentPage, setParentPage }) => {
   }, [pageData.id, baseURL]);
 
   useEffect(() => {
+    if (childPages.length === 0) return;
+
+    const fetchSeriesDescriptions = async () => {
+      try {
+        const descriptionPromises = childPages.map((page) =>
+          axios.get(`${baseURL}/pages/${page.id}`).then((response) => ({
+            slug: page.slug,
+            description: response.data.content.rendered,
+          }))
+        );
+
+        const descriptions = await Promise.all(descriptionPromises);
+        const descriptionHash = descriptions.reduce((acc, { slug, description }) => {
+          acc[slug] = description;
+          return acc;
+        }, {});
+
+        setSeriesDescription(descriptionHash);
+        console.log("series description hash", descriptionHash);
+      } catch (error) {
+        console.error("Error fetching series descriptions", error);
+      }
+    };
+
+    fetchSeriesDescriptions();
+  }, [childPages, baseURL]);
+
+
+  useEffect(() => {
     const fetchImages = async () => {
       try {
         const { data } = await axios.get(`${baseURL}/media?search=series-${parentPage}`);
@@ -64,27 +94,28 @@ const Page = ({ parentPage, setParentPage }) => {
 
   return (
     <>
-      <h5>This is the current page: {parentPage.toUpperCase()}</h5>
+      <h5>{parentPage.toUpperCase()}</h5>
       <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
 
       <div className="series-section">
         {childPages.length > 0 ? (
           childPages.map((seriesData) => (
             <div key={seriesData.id} className="series-card">
-            <SeriesCard seriesData={seriesData} seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus}/>
+              <SeriesCard seriesData={seriesData} seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} />
             </div>
           ))
-          
-          ) : (
+
+        ) : (
           // <h1>Loading the series from this project...</h1>
           null
         )}
       </div>
 
       <div>
-        <SeriesPage seriesFocus={seriesFocus}/>
+        
+        <SeriesPage seriesFocus={seriesFocus} description={seriesDescription[seriesFocus]} />
       </div>
-{/* 
+      {/* 
       <div>
         {pageImages.length > 0 ? (
           pageImages.map((pic) => (
@@ -99,7 +130,7 @@ const Page = ({ parentPage, setParentPage }) => {
         )}
       </div> */}
 
-      {parentPage==='contact'? <div><h1>Contact</h1><ContactForm /></div>: null}
+      {parentPage === 'contact' ? <div><h1>Contact</h1><ContactForm /></div> : null}
     </>
   );
 };
