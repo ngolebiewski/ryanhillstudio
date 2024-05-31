@@ -53,14 +53,19 @@ const Studio = ({ parentPage }) => {
         ) : posts.length > 0 ? (
           <div>
             {posts.map((post) => (
+              
               <div key={post.id} className="series-card contact">
                 <h1>{post.title.rendered}</h1>
                 <h5> <DateFormatter dateString={post.date} /></h5>
                 <br />
-                <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
                 {post.featImg.imageURL && (
                   <img src={post.featImg.imageURL} alt={post.featImg.imageAlt} />
                 )}
+                <br />
+                {/* <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                <button>[More]</button> */}
+                <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+                
               </div>
             ))}
           </div>
