@@ -6,7 +6,7 @@ const SoundSwiper = ({ children, isSoundOn }) => {
   const swipeAreaRef = useRef(null);
 
   const sounds = {
-    ryanHill: new Howl({ src: ["/sounds/site/Moog_FX_28.wav"], volume: 0.2 }),
+    ryanHill: new Howl({ src: ["/sounds/site/Moog_FX_28.wav"], volume: 0.4 }),
     drawing: new Howl({ src: ["/sounds/site/27567__suonho__memorymoon_pad-luminize.wav"], volume: 0.2 }), 
     installation: new Howl({ src: ["/sounds/site/542775__hoergewohnheit__moog-sirin-c4-filter-sweep-16-bit.wav"], volume: 0.2 }),  
     events: new Howl({ src: ["/sounds/site/379878__maikguts__moog-theremin-sweep-effected.mp3"], volume: 0.2 }),    
@@ -40,8 +40,9 @@ const SoundSwiper = ({ children, isSoundOn }) => {
     });
   
     
-
+    
     return () => {
+      sounds.ryanHill.play();
       hammer.off('swiperight');
       hammer.off('swipeleft');
       hammer.off('pinchin');
@@ -54,7 +55,6 @@ const SoundSwiper = ({ children, isSoundOn }) => {
   return (
     <div ref={swipeAreaRef} style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'auto'  }}>
       {console.log(isSoundOn)}
-      {sounds.ryanHill.play()}
       {children}
     </div>
   );
