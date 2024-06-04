@@ -14,9 +14,11 @@ function App() {
 
   return (
     <>
+      <div id="nav">
+      <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
       <Header setParentPage={setParentPage} />
       {/* <ArtMenu parentPage={parentPage} setParentPage={setParentPage} /> */}
-      <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
+      </div>
       <Routes>
         <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
         <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />

@@ -57,17 +57,19 @@ const items = [
 
 const MainMenu = ({ parentPage, setParentPage }) => {
   return (
-    <Dropdown id="menu"
-      menu={{
-        items,
-      }}
-    >
-      <a onClick={(e) => e.preventDefault()}>
-        <Space>
-          <MenuOutlined />
-        </Space>
-      </a>
-    </Dropdown>
+    <div className="menu-spacer">
+      <Dropdown id="menu"
+        menu={{
+          items,
+        }}
+      >
+        <a onClick={(e) => e.preventDefault()}>
+          <Space>
+            <MenuOutlined />
+          </Space>
+        </a>
+      </Dropdown>
+    </div>
   )
 }
 

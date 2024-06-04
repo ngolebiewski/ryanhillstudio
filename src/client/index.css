@@ -19,8 +19,18 @@ body{
 #menu {
   border: 1px solid black;
   margin: 10px;
-
 }
+
+#nav{
+  display: flex;
+  direction: row;
+  align-items: center;
+}
+
+.menu-spacer {
+  padding: 5px;
+}
+
 h1{
   font-size: 3vh;
 }
