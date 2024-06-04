@@ -7,6 +7,7 @@ import { useState } from "react";
 import Page from "./components/Page";
 import Home from "./components/Home";
 import Studio from "./components/Studio";
+import MainMenu from "./components/MainMenu";
 
 function App() {
   const [parentPage, setParentPage] = useState("home");
@@ -14,7 +15,8 @@ function App() {
   return (
     <>
       <Header setParentPage={setParentPage} />
-      <ArtMenu parentPage={parentPage} setParentPage={setParentPage} />
+      {/* <ArtMenu parentPage={parentPage} setParentPage={setParentPage} /> */}
+      <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
       <Routes>
         <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
         <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />

@@ -42,7 +42,7 @@ const SoundSwiper = ({ children, isSoundOn }) => {
     
     
     return () => {
-      sounds.ryanHill.play();
+      // sounds.ryanHill.play();
       hammer.off('swiperight');
       hammer.off('swipeleft');
       hammer.off('pinchin');
