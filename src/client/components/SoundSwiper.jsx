@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Hammer from 'hammerjs';
 import { Howl } from 'howler';
 
-const SoundSwiper = ({ children, sound }) => {
+const SoundSwiper = ({ children, isSoundOn }) => {
   const swipeAreaRef = useRef(null);
 
   const sounds = {
@@ -18,7 +18,7 @@ const SoundSwiper = ({ children, sound }) => {
   useEffect(() => {
     const swipeArea = swipeAreaRef.current;
     const hammer = new Hammer(swipeArea);
-    if (sound) {
+    if (isSoundOn) {
     hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
 
 
@@ -46,12 +46,11 @@ const SoundSwiper = ({ children, sound }) => {
       hammer.off('pinchout');
     };
   }
-  }, [sound]);
+  }, [isSoundOn]);
 
   return (
     <div ref={swipeAreaRef} style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'auto'  }}>
-      <h1>{sound}</h1>
-      {console.log(sound)}
+      {console.log(isSoundOn)}
       {children}
     </div>
   );

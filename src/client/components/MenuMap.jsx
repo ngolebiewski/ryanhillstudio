@@ -13,12 +13,12 @@ const sounds = {
   contact: new Howl({ src: ["/sounds/site/Moog_String_C2.wav"], volume: 0.3 }),    
 }
 
-const MenuMap = ({setSound}) => {
+const MenuMap = ({isSoundOn, setIsSoundOn}) => {
   const imgRef = useRef(null);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [percentageCoords, setPercentageCoords] = useState([]);
-  const [isSoundOn, setIsSoundOn] = useState(false);
+  // const [isSoundOn, setIsSoundOn] = useState(false);
 
   const handleAreaMouseOver = (soundKey, pressure = 0.1) => {
     // console.log(`Sound On: ${isSoundOn}, Sound Key: ${soundKey}, Pressure: ${pressure}`);
@@ -34,7 +34,6 @@ const MenuMap = ({setSound}) => {
     setIsSoundOn(prevState => {
       const newState = !prevState;
       console.log(`Toggling sound. New state: ${newState}`);
-      setSound(newState)
       return newState;
     });
   };

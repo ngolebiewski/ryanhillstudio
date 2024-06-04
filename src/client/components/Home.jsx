@@ -4,15 +4,15 @@ import { useState } from "react"
 
 const Home = ({ parentPage, setParentPage }) => {
   const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const [sound, setSound] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(false);
 
   return(
     <>
       {isMobileOrTablet?
-      <SoundSwiper isSoundOn={setSound} >
-      <MenuMap setParentPage={setParentPage} />
+      <SoundSwiper isSoundOn={isSoundOn} >
+      <MenuMap setParentPage={setParentPage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn}/>
       </SoundSwiper> :
-      <MenuMap setParentPage={setParentPage} setSound={setSound}/>}
+      <MenuMap setParentPage={setParentPage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn}/>}
     </>
   )
 }
