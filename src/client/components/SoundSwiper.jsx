@@ -18,7 +18,7 @@ const SoundSwiper = ({ children, isSoundOn }) => {
   useEffect(() => {
     const swipeArea = swipeAreaRef.current;
     const hammer = new Hammer(swipeArea);
-    if (isSoundOn) {
+    
     hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
 
 
@@ -45,7 +45,7 @@ const SoundSwiper = ({ children, isSoundOn }) => {
       hammer.off('pinchin');
       hammer.off('pinchout');
     };
-  }
+  
   }, [isSoundOn]);
 
   return (
