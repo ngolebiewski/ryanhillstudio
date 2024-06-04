@@ -10,7 +10,7 @@ const sounds = {
   installation: new Howl({ src: ["/sounds/site/542775__hoergewohnheit__moog-sirin-c4-filter-sweep-16-bit.wav"], volume: 0.2 }),  
   events: new Howl({ src: ["/sounds/site/379878__maikguts__moog-theremin-sweep-effected.mp3"], volume: 0.2 }),    
   studio: new Howl({ src: ["/sounds/site/Moog_Brass_A4.wav"], volume: 0.1 }),  
-  contact: new Howl({ src: ["/sounds/site/Moog_String_C2.wav"], volume: 0.3 }),    
+  contact: new Howl({ src: ["/sounds/site/Moog_String_C2.wav"], volume: 0.1 }),    
 }
 
 const MenuMap = ({isSoundOn, setIsSoundOn}) => {
@@ -135,7 +135,7 @@ const MenuMap = ({isSoundOn, setIsSoundOn}) => {
         ref={imgRef}
         src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg"
         useMap="#image-map"
-        style={{ maxHeight: "75vh" }}
+        style={{ maxHeight: "85vh" }}
       />
 
       {(percentageCoords && imageSize.width > 0) ?
