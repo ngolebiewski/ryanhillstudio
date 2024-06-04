@@ -13,7 +13,7 @@ const sounds = {
   contact: new Howl({ src: ["/sounds/site/Moog_String_C2.wav"], volume: 0.3 }),    
 }
 
-const MenuMap = () => {
+const MenuMap = ({setSound}) => {
   const imgRef = useRef(null);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
@@ -34,6 +34,7 @@ const MenuMap = () => {
     setIsSoundOn(prevState => {
       const newState = !prevState;
       console.log(`Toggling sound. New state: ${newState}`);
+      setSound(newState)
       return newState;
     });
   };
@@ -123,7 +124,6 @@ const MenuMap = () => {
 
   return (
     <>
-
       <Tooltip title="Sound on/off">
         <Button
           type="text"
@@ -131,7 +131,7 @@ const MenuMap = () => {
           onClick={toggleSound}
         />
       </Tooltip>
-
+      
       <img
         ref={imgRef}
         src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg"
@@ -151,8 +151,6 @@ const MenuMap = () => {
         </map>
 
         : null}
-
-
     </>
   );
 };
