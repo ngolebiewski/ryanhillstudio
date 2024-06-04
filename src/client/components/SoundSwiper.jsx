@@ -18,9 +18,10 @@ const SoundSwiper = ({ children, isSoundOn }) => {
   useEffect(() => {
     const swipeArea = swipeAreaRef.current;
     const hammer = new Hammer(swipeArea);
-    
-    hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+    isSoundOn? console.log('turning on') : console.log('turning off');
 
+    if (isSoundOn) {
+    hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
 
     hammer.on('swiperight', () => {
       sounds.drawing.play();
@@ -38,6 +39,7 @@ const SoundSwiper = ({ children, isSoundOn }) => {
       sounds.contact.play();
     });
   
+    
 
     return () => {
       hammer.off('swiperight');
@@ -45,12 +47,14 @@ const SoundSwiper = ({ children, isSoundOn }) => {
       hammer.off('pinchin');
       hammer.off('pinchout');
     };
-  
+  }
+    
   }, [isSoundOn]);
 
   return (
     <div ref={swipeAreaRef} style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'auto'  }}>
       {console.log(isSoundOn)}
+      {sounds.ryanHill.play()}
       {children}
     </div>
   );
