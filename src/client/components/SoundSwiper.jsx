@@ -18,10 +18,10 @@ const SoundSwiper = ({ children, sound }) => {
   useEffect(() => {
     const swipeArea = swipeAreaRef.current;
     const hammer = new Hammer(swipeArea);
-
+    if (sound) {
     hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
 
-    if (sound) {
+
     hammer.on('swiperight', () => {
       sounds.drawing.play();
     });
@@ -37,7 +37,7 @@ const SoundSwiper = ({ children, sound }) => {
     hammer.on('pinchout', () => {
       sounds.contact.play();
     });
-  }
+  
 
     return () => {
       hammer.off('swiperight');
@@ -45,12 +45,13 @@ const SoundSwiper = ({ children, sound }) => {
       hammer.off('pinchin');
       hammer.off('pinchout');
     };
-
+  }
   }, [sound]);
 
   return (
-    <div ref={swipeAreaRef} style={{ width: '100%', height: '100vh', touchAction: 'none' }}>
+    <div ref={swipeAreaRef} style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'auto'  }}>
       <h1>{sound}</h1>
+      {console.log(sound)}
       {children}
     </div>
   );
