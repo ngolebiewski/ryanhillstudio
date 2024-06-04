@@ -50,6 +50,7 @@ const SoundSwiper = ({ children, sound }) => {
 
   return (
     <div ref={swipeAreaRef} style={{ width: '100%', height: '100vh', touchAction: 'none' }}>
+      <h1>{sound}</h1>
       {children}
     </div>
   );
