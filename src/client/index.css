@@ -91,3 +91,8 @@ footer {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.custom-carousel .slick-prev,
+.custom-carousel .slick-next {
+  color: black; /* Change arrow color to black */
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import CarouselTest from "./CarouselTest";
 
 //seriesFocus is the slug for the series name, i.e. "sketches"
 const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
@@ -42,13 +43,13 @@ const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
     console.log(location.pathname)
     setSeriesImages(null);
     setSeriesFocus(null);
-    description=null;
+    description = null;
   }, [location]);
 
   return (
     <>
       <div>
-      <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
+        <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
         <div dangerouslySetInnerHTML={{ __html: description }} />
         {seriesImages ?
           <div>
@@ -62,11 +63,18 @@ const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
               </div>
 
             ))}
-          </div>
+            </div>
           : null}
-      </div>
+          {seriesImages && seriesImages[0] ?
+              <div style={{ margin: "40px" }}>
+              <CarouselTest />
+            </div>
+            :
+            null}
+
+          </div>
     </>
-  )
+      )
 }
 
-export default SeriesPage;
+      export default SeriesPage;
