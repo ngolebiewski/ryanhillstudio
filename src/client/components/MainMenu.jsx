@@ -57,7 +57,7 @@ const items = [
 
 const MainMenu = ({ parentPage, setParentPage }) => {
   return (
-    <div className="menu-spacer">
+    <div >
       <Dropdown id="menu"
         menu={{
           items,

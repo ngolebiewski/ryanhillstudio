@@ -3,19 +3,30 @@
 @tailwind utilities;
 
 * {
-  /* border: px dashed magenta; */
-  font-family: "Courier Prime", Courier, 'Courier New', monospace;
+  font-family: "futura-pt", "Futura", Futura, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
 body{
   background-color: white;
   color: black;
-  font-family: "Courier Prime", Courier, 'Courier New', monospace;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+  font-family: "Futura", Futura, Helvetica, sans-serif;
 }
 
+h1{
+  font-size: 2vh;
+}
+
+.art-title {
+    font-family: "futura-pt", "Futura", Futura, Helvetica, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  
+}
+
+
+
+/* ////////////////////////////////// */
 #menu {
   border: 1px solid black;
   margin: 10px;
@@ -25,53 +36,42 @@ body{
   display: flex;
   direction: row;
   align-items: center;
+  border-bottom: 1px black solid;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  justify-content: space-between;
 }
 
-.menu-spacer {
-  padding: 5px;
+#nav > div {
+  padding: 15px 20px 10px 20px;
 }
 
-h1{
-  font-size: 3vh;
+#header-title{
+  font-size: 3em;
 }
+/* ////////////////////////////////// */
 
-header>h1{
-  font-size: 4vh;
-  /* align-items: center;
-  text-align: center; */
-}
 
-.courier-prime-regular {
-  font-family: "Courier Prime", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.courier-prime-bold {
-  font-family: "Courier Prime", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.courier-prime-regular-italic {
-  font-family: "Courier Prime", monospace;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.courier-prime-bold-italic {
-  font-family: "Courier Prime", monospace;
-  font-weight: 700;
-  font-style: italic;
-}
-
-footer {
+/* ////////////////////////////////// */
+#main-container{
+  margin: 0 10vw;
+  /* border: 1px solid black; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%; /* Assuming full width */
+  direction: column;
+  justify-content: left;
+}
+
+#center-container{
+  margin: 0 10vw;
+  /* border: 1px solid black; */
+  display: flex;
+  direction: column;
+  justify-content: center;
+}
+
+.sub-container{
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
 .series-card {
@@ -86,6 +86,8 @@ footer {
   max-width: 400px;
 }
 
+
+
 .series-section {
   display: flex;
   flex-direction: row;
@@ -95,4 +97,13 @@ footer {
 .custom-carousel .slick-prev,
 .custom-carousel .slick-next {
   color: black; /* Change arrow color to black */
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* Assuming full width */
 }

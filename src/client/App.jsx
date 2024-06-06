@@ -8,6 +8,7 @@ import Page from "./components/Page";
 import Home from "./components/Home";
 import Studio from "./components/Studio";
 import MainMenu from "./components/MainMenu";
+import SoundMachine from "./components/SoundMachine";
 
 function App() {
   const [parentPage, setParentPage] = useState("home");
@@ -15,19 +16,28 @@ function App() {
   return (
     <>
       <div id="nav">
-      <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
-      <Header setParentPage={setParentPage} />
-      {/* <ArtMenu parentPage={parentPage} setParentPage={setParentPage} /> */}
+        <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
+        <Header setParentPage={setParentPage} />
+        <SoundMachine />
+        {/* <ArtMenu parentPage={parentPage} setParentPage={setParentPage} /> */}
       </div>
-      <Routes>
-        <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
-        <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />
-        <Route path="/drawing" element={<Page parentPage={"drawing"} setParentPage={setParentPage} />} />
-        <Route path="/installation" element={<Page parentPage={"installation"} setParentPage={setParentPage} />} />
-        <Route path="/studio" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
-        <Route path="/events" element={<Page parentPage={"events"} setParentPage={setParentPage} />} />
-        <Route path="/contact" element={<Page parentPage={"contact"} setParentPage={setParentPage} />} />
-      </Routes>
+
+      <section id="center-container">
+        <Routes>
+          <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
+        </Routes>
+      </section>
+
+      <section id="main-container">
+        <Routes>
+          <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />
+          <Route path="/drawing" element={<Page parentPage={"drawing"} setParentPage={setParentPage} />} />
+          <Route path="/installation" element={<Page parentPage={"installation"} setParentPage={setParentPage} />} />
+          <Route path="/studio" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
+          <Route path="/events" element={<Page parentPage={"events"} setParentPage={setParentPage} />} />
+          <Route path="/contact" element={<Page parentPage={"contact"} setParentPage={setParentPage} />} />
+        </Routes>
+      </section>
       <Footer />
     </>
   );

@@ -58,19 +58,19 @@ const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
             {seriesImages.map((artwork) => (
               <div key={artwork.id}>
                 <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />
-                <p className="courier-prime-regular-italic">{artwork.title.rendered}</p>
+                <p className="art-title">{artwork.title.rendered}</p>
                 <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
               </div>
 
             ))}
             </div>
           : null}
-          {seriesImages && seriesImages[0] ?
+          {/* {seriesImages && seriesImages[0] ?
               <div style={{ margin: "40px" }}>
               <CarouselTest />
             </div>
             :
-            null}
+            null} */}
 
           </div>
     </>

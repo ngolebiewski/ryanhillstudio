@@ -93,9 +93,11 @@ const Page = ({ parentPage, setParentPage }) => {
   }, [parentPage, baseURL]);
 
   return (
-    <>
-      <h5>{parentPage.toUpperCase()}</h5>
-      <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
+    <div className="sub-container">
+      <div className="sub-header">
+        <h1>{parentPage.toUpperCase()}</h1>
+        <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
+      </div>
 
       <div className="series-section">
         {childPages.length > 0 ? (
@@ -112,7 +114,7 @@ const Page = ({ parentPage, setParentPage }) => {
       </div>
 
       <div>
-        
+
         <SeriesPage seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} description={seriesDescription[seriesFocus]} />
       </div>
       {/* 
@@ -131,7 +133,7 @@ const Page = ({ parentPage, setParentPage }) => {
       </div> */}
 
       {parentPage === 'contact' ? <div><h1>Contact</h1><ContactForm /></div> : null}
-    </>
+    </div>
   );
 };
 

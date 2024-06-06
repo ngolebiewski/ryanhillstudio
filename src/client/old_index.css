@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  /* border: px dashed magenta; */
+  font-family: "Futura", "Courier Prime", Courier, 'Courier New', monospace;
+}
+
+body{
+  background-color: white;
+  color: black;
+  font-family: "Courier Prime", Courier, 'Courier New', monospace;
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+#menu {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+#nav{
+  display: flex;
+  direction: row;
+  align-items: center;
+}
+
+.menu-spacer {
+  padding: 5px;
+}
+
+h1{
+  font-size: 3vh;
+}
+
+header>h1{
+  font-size: 4vh;
+  /* align-items: center;
+  text-align: center; */
+}
+
+.courier-prime-regular {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.courier-prime-bold {
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.courier-prime-regular-italic {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.courier-prime-bold-italic {
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* Assuming full width */
+}
+
+.series-card {
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  max-width: 200px;
+}
+
+.contact {
+  max-width: 400px;
+}
+
+.series-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.custom-carousel .slick-prev,
+.custom-carousel .slick-next {
+  color: black; /* Change arrow color to black */
+}

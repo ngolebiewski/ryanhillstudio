@@ -13,7 +13,7 @@ const Home = ({ parentPage, setParentPage }) => {
       <MenuMap setParentPage={setParentPage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn}/>
       </SoundSwiper> :
       <MenuMap setParentPage={setParentPage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn}/>}
-    </>
+      </>
   )
 }
 
