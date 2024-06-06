@@ -62,7 +62,7 @@ h1{
 }
 
 #center-container{
-  margin: 0 10vw;
+  margin: 0 1vw;
   /* border: 1px solid black; */
   display: flex;
   direction: column;
