@@ -167,4 +167,8 @@ footer {
   .big-art {
     height: 60vh;
   }
+  .contact {
+    max-width: 400px;
+  }
+
 }
