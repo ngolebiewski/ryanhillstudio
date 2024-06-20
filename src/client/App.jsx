@@ -18,7 +18,8 @@ function App() {
       <div id="nav">
         <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
         <Header setParentPage={setParentPage} />
-        <SoundMachine />
+        {/* <SoundMachine /> */}
+        <Footer />
         {/* <ArtMenu parentPage={parentPage} setParentPage={setParentPage} /> */}
       </div>
 
@@ -39,7 +40,7 @@ function App() {
           <Route path="/contact/*" element={<Page parentPage={"contact"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
