@@ -25,6 +25,7 @@ function App() {
       <section id="center-container">
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
+          <Route path="/studio*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="/ryan-hill" element={<Page parentPage={"ryan-hill"} setParentPage={setParentPage} />} />
           <Route path="/drawing/*" element={<Page parentPage={"drawing"} setParentPage={setParentPage} />} />
           <Route path="/installation/*" element={<Page parentPage={"installation"} setParentPage={setParentPage} />} />
-          <Route path="/studio*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
+   
           <Route path="/events/*" element={<Page parentPage={"events"} setParentPage={setParentPage} />} />
           <Route path="/contact/*" element={<Page parentPage={"contact"} setParentPage={setParentPage} />} />
         </Routes>

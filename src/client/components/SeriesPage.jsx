@@ -48,34 +48,41 @@ const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
 
   return (
     <>
-      <div>
+      <div className="sub-header">
         <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
         <div dangerouslySetInnerHTML={{ __html: description }} />
         {seriesImages ?
-          <div>
+          <div className="big-art-container">
             {console.log("i just got the fetched the images", seriesImages)}
             {/* <h2>Here are the images within the {seriesFocus} page:</h2> */}
             {seriesImages.map((artwork) => (
-              <div key={artwork.id}>
+
+              <div key={artwork.id} className="big-art">
                 {/* <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} /> */}
-                <img key={artwork.id} src={artwork.media_details.sizes.large.source_url} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />
-                <p className="art-title">{artwork.title.rendered}</p>
-                <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
+                <div className="big-art-img-container">
+                  <img key={artwork.id} src={artwork.media_details.sizes.large.source_url} alt={artwork.alt_text} className="big-art-img" />
+                </div>
+                <div>
+                <div className="wall-label">
+                  <p className="art-title">{artwork.title.rendered}</p>
+                  <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
+                </div>
+                </div>
               </div>
 
             ))}
-            </div>
+          </div>
           : null}
-          {/* {seriesImages && seriesImages[0] ?
+        {/* {seriesImages && seriesImages[0] ?
               <div style={{ margin: "40px" }}>
               <CarouselTest />
             </div>
             :
             null} */}
 
-          </div>
+      </div>
     </>
-      )
+  )
 }
 
-      export default SeriesPage;
+export default SeriesPage;

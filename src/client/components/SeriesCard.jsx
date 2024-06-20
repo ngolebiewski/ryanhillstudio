@@ -36,6 +36,7 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
   return (
     <div onClick={handleSeriesClick}>
       <h1>{seriesData.slug.toUpperCase().replaceAll("-"," ")}</h1>
+      
       {featuredImage ? (
         <img className="series-card-image" src={featuredImage.url} alt={featuredImage.alt_text} />
       ) : (

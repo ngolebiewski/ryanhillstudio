@@ -7,24 +7,21 @@
   font-weight: 400;
 }
 
-body{
+body {
   background-color: white;
   color: black;
   font-family: "Futura", Futura, Helvetica, sans-serif;
 }
 
-h1{
+h1 {
   font-size: 2vh;
 }
 
 .art-title {
-    font-family: "futura-pt", "Futura", Futura, Helvetica, sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  
+  font-family: "futura-pt", "Futura", Futura, Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: italic;
 }
-
-
 
 /* ////////////////////////////////// */
 #menu {
@@ -32,7 +29,7 @@ h1{
   margin: 10px;
 }
 
-#nav{
+#nav {
   display: flex;
   direction: row;
   align-items: center;
@@ -46,14 +43,13 @@ h1{
   padding: 15px 20px 10px 20px;
 }
 
-#header-title{
+#header-title {
   font-size: 4vh;
 }
 /* ////////////////////////////////// */
 
-
 /* ////////////////////////////////// */
-#main-container{
+#main-container {
   margin: 0 10vw;
   /* border: 1px solid black; */
   display: flex;
@@ -61,15 +57,18 @@ h1{
   justify-content: left;
 }
 
-#center-container{
+#center-container {
   margin: 0 1vw;
-  /* border: 1px solid black; */
   display: flex;
   direction: column;
   justify-content: center;
 }
 
-.sub-container{
+.sub-header {
+  width: 80vw;
+}
+
+.sub-container {
   flex-wrap: wrap;
   justify-content: left;
 }
@@ -79,20 +78,75 @@ h1{
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
-  max-width: 200px;
+  width: 200px;
 }
 
 .contact {
-  max-width: 400px;
+  width: 600px;
 }
-
-
 
 .series-section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+/* ------------------------------------ */
+/* Large image section                  */
+/* ------------------------------------ */
+
+.big-art-container {
+  /* border: 1px solid pink; */
+  padding: 1px;
+  margin: 2em 0;
+  width: 100%;
+}
+
+.big-art {
+  /* border: 1px solid green; */
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 0 4em 0;
+  border-bottom: 1px dotted black;
+}
+
+.big-art-img-container {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  overflow: hidden;
+  margin-bottom: 2em;
+}
+
+.big-art-img-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.big-art-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.wall-label {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 10px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); 
+}
+
+
+/* ------------------------------------ */
 
 .custom-carousel .slick-prev,
 .custom-carousel .slick-next {
@@ -106,4 +160,11 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%; /* Assuming full width */
+}
+
+
+@media screen and (max-width: 800px) {
+  .big-art {
+    height: 60vh;
+  }
 }
