@@ -132,7 +132,8 @@ const Page = ({ parentPage, setParentPage }) => {
         )}
       </div> */}
 
-      {parentPage === 'contact' ? <div><h1>Contact</h1><ContactForm /></div> : null}
+      {/* Un comment this code below to add in the contact form */}
+      {/* {parentPage === 'contact' ? <div><h1>Contact</h1><ContactForm /></div> : null} */}
     </div>
   );
 };
