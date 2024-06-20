@@ -57,7 +57,8 @@ const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
             {/* <h2>Here are the images within the {seriesFocus} page:</h2> */}
             {seriesImages.map((artwork) => (
               <div key={artwork.id}>
-                <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />
+                {/* <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} /> */}
+                <img key={artwork.id} src={artwork.media_details.sizes.large.source_url} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} />
                 <p className="art-title">{artwork.title.rendered}</p>
                 <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
               </div>

@@ -114,7 +114,6 @@ const Page = ({ parentPage, setParentPage }) => {
       </div>
 
       <div>
-
         <SeriesPage seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} description={seriesDescription[seriesFocus]} />
       </div>
       {/* 

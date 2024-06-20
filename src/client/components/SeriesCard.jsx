@@ -13,7 +13,7 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
       try {
         const { data } = await axios.get(`${baseURL}/media/${seriesData.featured_media}`);
         setFeaturedImage({
-          url: data.media_details.sizes.large.source_url,
+          url: data.media_details.sizes.medium.source_url,
           alt_text: data.alt_text
         });
         console.log(featuredImage);
