@@ -2,25 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SeriesCard from "./SeriesCard";
 import SeriesPage from "./SeriesPage";
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, resetCurrentPage } from "../redux/pageSlice";
+import ContactForm from "./ContactForm";
 
 const Page = ({ parentPage, setParentPage }) => {
   const baseURL = import.meta.env.VITE_API;
-  const sitePages = useSelector((state) => state.pages.sitePages);
-  const dispatch = useDispatch();
-  const currentPageObject = useSelector((state) => state.pages.currentPage)
-
-  //Get the location, urls are dynamic, so useParams is weird.
-  const location = useLocation();
-  const fullPath = location.pathname;
-  const segments = fullPath.split('/');
-  const currentPath = segments[segments.length - 1];
-  console.log("***current path***: ",currentPath)
-  
-
-  //old
   const [pageData, setPageData] = useState({});
   const [pageDescription, setPageDescription] = useState("Loading...");
   const [pageImages, setPageImages] = useState([]);
@@ -29,28 +14,69 @@ const Page = ({ parentPage, setParentPage }) => {
   const [seriesArtworks, setSeriesArtworks] = useState([]); //stores all the images plus descriptive text in a series 
   const [seriesDescription, setSeriesDescription] = useState({}); //make hash table for series descriptions
 
-
   useEffect(() => {
-    dispatch(resetCurrentPage())
-  },[])
-
-  useEffect(() => {
-    if (currentPath && sitePages) {
-      const matchingPage = Object.values(sitePages).find(page => 
-        page.title.rendered.replace(/\s+/g, '-').toLowerCase() === currentPath
-      );
-      
-      if (matchingPage) {
-        dispatch(setCurrentPage(matchingPage));
-        setParentPage(matchingPage.title.rendered);
-        console.log("current page set: ")
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseURL}/pages?slug=${parentPage}`);
+        const data = response.data;
+        if (data.length > 0 && data[0].content) {
+          setPageData(data[0]);
+          setPageDescription(data[0].content.rendered);
+        } else {
+          setPageDescription("Page not found");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setPageDescription("Error fetching data");
       }
-    }
-  }, [currentPath, dispatch]);
+    };
 
-  useEffect(()=>{
-    console.log(currentPageObject)
-  },[currentPageObject])
+    fetchData();
+  }, [parentPage, baseURL]);
+
+  useEffect(() => {
+    const fetchChildPages = async () => {
+      if (!pageData.id) return;
+      try {
+        const { data } = await axios.get(`${baseURL}/pages?parent=${pageData.id}`);
+        setChildPages(data);
+        console.log(`Child Pages Fetched:`);
+        console.log({ data })
+      } catch (error) {
+        console.error("Error fetching children page data", error);
+      }
+    };
+
+    fetchChildPages();
+  }, [pageData.id, baseURL]);
+
+  useEffect(() => {
+    if (childPages.length === 0) return;
+
+    const fetchSeriesDescriptions = async () => {
+      try {
+        const descriptionPromises = childPages.map((page) =>
+          axios.get(`${baseURL}/pages/${page.id}`).then((response) => ({
+            slug: page.slug,
+            description: response.data.content.rendered,
+          }))
+        );
+
+        const descriptions = await Promise.all(descriptionPromises);
+        const descriptionHash = descriptions.reduce((acc, { slug, description }) => {
+          acc[slug] = description;
+          return acc;
+        }, {});
+
+        setSeriesDescription(descriptionHash);
+        console.log("series description hash", descriptionHash);
+      } catch (error) {
+        console.error("Error fetching series descriptions", error);
+      }
+    };
+
+    fetchSeriesDescriptions();
+  }, [childPages, baseURL]);
 
 
   useEffect(() => {
@@ -66,15 +92,11 @@ const Page = ({ parentPage, setParentPage }) => {
     fetchImages();
   }, [parentPage, baseURL]);
 
-  console.log(currentPageObject.pageDescription)
   return (
     <div className="sub-container">
       <div className="sub-header">
         <h1>{parentPage.toUpperCase()}</h1>
-        { currentPageObject.content?
-        <div dangerouslySetInnerHTML={{ __html: currentPageObject.content.rendered}} /> :
-        <></>
-}
+        <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
       </div>
 
       <div className="series-section">
@@ -108,6 +130,9 @@ const Page = ({ parentPage, setParentPage }) => {
           <></>
         )}
       </div> */}
+
+      {/* Un comment this code below to add in the contact form */}
+      {/* {parentPage === 'contact' ? <div><h1>Contact</h1><ContactForm /></div> : null} */}
     </div>
   );
 };

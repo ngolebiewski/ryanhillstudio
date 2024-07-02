@@ -1,88 +1,75 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import CarouselTest from "./CarouselTest";
+import { updateImageInHash } from "../redux/pageSlice";
 
-//seriesFocus is the slug for the series name, i.e. "sketches"
-const SeriesPage = ({ seriesFocus, setSeriesFocus, description }) => {
+const SeriesPage = () => {
   const baseURL = import.meta.env.VITE_API;
-  const [seriesImages, setSeriesImages] = useState(null);
-  const location = useLocation();
+  const dispatch = useDispatch();
+  const page = useSelector((state) => state.pages.currentPage);
+  
+  // Ensure `seriesFocus` is computed only if `page` and `page.title` are defined
+  const seriesFocus = page && page.title ? page.title.rendered.replace(/\s+/g, '-').toLowerCase() : null;
+  
+  // Access the image hash from the state using seriesFocus
+  const imageHash = useSelector((state) => state.pages.imageHash[seriesFocus]);
+  console.log("series focus", seriesFocus);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        console.log(`${baseURL}/media?search=series-${seriesFocus}`)
         const { data } = await axios.get(`${baseURL}/media?search=series-${seriesFocus}`);
+        console.log(seriesFocus)
 
-        // Sort data based on number after series name within the media description, i.e. "series-sketches-10" vs. "series-sketches-20"
+        // Sort data based on number after series name within the media description, e.g., "series-sketches-10"
         const regex = new RegExp(`series-${seriesFocus}-(\\d+)[^0-9]`);
-
         data.sort((a, b) => {
           const aMatch = a.description.rendered.match(regex);
           const bMatch = b.description.rendered.match(regex);
-
           const aNum = aMatch ? parseInt(aMatch[1], 10) : 0;
           const bNum = bMatch ? parseInt(bMatch[1], 10) : 0;
-
           return aNum - bNum;
         });
 
-        setSeriesImages(data)
+        dispatch(updateImageInHash({ seriesKey: seriesFocus, images: data }));
       } catch (error) {
         console.error("Error obtaining images from the server.", error);
       }
     };
 
-    fetchImages();
-  }, [seriesFocus])
-
-
-  useEffect(() => {
-    // Reset the seriesImages state to null when location changes
-    console.log(location.pathname)
-    setSeriesImages(null);
-    setSeriesFocus(null);
-    description = null;
-  }, [location]);
+    // Fetch images only if they are not already in the imageHash
+    if (seriesFocus && !imageHash) {
+      fetchImages();
+    }
+  }, [baseURL, seriesFocus, dispatch, imageHash]);
 
   return (
-    <>
-      <div className="sub-header">
-        <h1>{seriesFocus ? seriesFocus.toUpperCase().replaceAll("-", " ") : ""}</h1>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
-        {seriesImages ?
-          <div className="big-art-container">
-            {console.log("i just got the fetched the images", seriesImages)}
-            {/* <h2>Here are the images within the {seriesFocus} page:</h2> */}
-            {seriesImages.map((artwork) => (
+    <div className="series-page">
+      {imageHash ? (
+        <div className="series-images">
+          {imageHash.map((artwork) => {
+            // Use large size if available, otherwise fallback to medium or thumbnail
+            const imageUrl = artwork.media_details.sizes.large?.source_url ||
+                             artwork.media_details.sizes.medium?.source_url ||
+                             artwork.media_details.sizes.thumbnail?.source_url;
 
-              <div key={artwork.id} className="big-art">
-                {/* <img key={artwork.id} src={artwork.link} alt={artwork.alt_text} style={{ maxHeight: "40vh" }} /> */}
-                <div className="big-art-img-container">
-                  <img key={artwork.id} src={artwork.media_details.sizes.large.source_url} alt={artwork.alt_text} className="big-art-img" />
-                </div>
-                <div>
-                <div className="wall-label">
-                  <p className="art-title">{artwork.title.rendered}</p>
-                  <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
-                </div>
-                </div>
+            return (
+              <div key={artwork.id} className="series-image">
+                {imageUrl ? (
+                  <img src={imageUrl} alt={artwork.alt_text} />
+                ) : (
+                  <p>No image available</p>
+                )}
+                <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
               </div>
-
-            ))}
-          </div>
-          : null}
-        {/* {seriesImages && seriesImages[0] ?
-              <div style={{ margin: "40px" }}>
-              <CarouselTest />
-            </div>
-            :
-            null} */}
-
-      </div>
-    </>
-  )
-}
+            );
+          })}
+        </div>
+      ) : (
+        <p>Loading images...</p>
+      )}
+    </div>
+  );
+};
 
 export default SeriesPage;

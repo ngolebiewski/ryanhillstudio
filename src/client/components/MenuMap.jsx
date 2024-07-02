@@ -122,8 +122,8 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
 
       {isImageLoaded && percentageCoords && imageSize.width > 0 && (
         <map name="image-map">
-          <area target="" alt="Ryan Hill" title="Ryan Hill" href="ryan-hill" coords={percentageCoords.ryanHill} shape="poly" onClick={() => handleAreaMouseOver('ryanHill')} onMouseOver={() => handleAreaMouseOver('ryanHill')} onPointerDown={(e) => handlePointerDown(e, 'ryanHill')} />
-          <area target="" alt="Drawing" title="Drawing" href="drawing" coords={percentageCoords.drawing} shape="poly" onMouseOver={() => handleAreaMouseOver('drawing')} onTouchStart={() => handleAreaMouseOver('drawing')} />
+          <area target="" alt="Ryan Hill" title="Ryan Hill" href="about" coords={percentageCoords.ryanHill} shape="poly" onClick={() => handleAreaMouseOver('ryanHill')} onMouseOver={() => handleAreaMouseOver('ryanHill')} onPointerDown={(e) => handlePointerDown(e, 'ryanHill')} />
+          <area target="" alt="Drawing" title="Drawing" href="series" coords={percentageCoords.drawing} shape="poly" onMouseOver={() => handleAreaMouseOver('drawing')} onTouchStart={() => handleAreaMouseOver('drawing')} />
           <area target="" alt="Installation" title="Installation" href="installation" coords={percentageCoords.installation} shape="poly" onMouseOver={() => handleAreaMouseOver('installation')} />
           <area target="" alt="Events" title="Events" href="events" coords={percentageCoords.events} shape="poly" onMouseOver={() => handleAreaMouseOver('events')} />
           <area target="" alt="Studio" title="Studio" href="studio" coords={percentageCoords.studio} shape="poly" onMouseOver={() => handleAreaMouseOver('studio')} />

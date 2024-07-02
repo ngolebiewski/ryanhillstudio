@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SeriesPage from "./SeriesPage";
+import { useNavigate } from "react-router-dom";
+
 
 const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
 
 
   const [featuredImage, setFeaturedImage] = useState({})
   const baseURL = import.meta.env.VITE_API;
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -30,7 +33,7 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
   const handleSeriesClick = () => {
     setSeriesFocus(seriesData.slug);
     console.log(seriesFocus);
-    // navigate(`/series/${seriesData.slug}`);
+    navigate(`/series/${seriesData.slug}`);
   };
 
   return (
