@@ -82,7 +82,7 @@ h1 {
 }
 
 .contact {
-  width: 500px;
+  width: 80vw;
 }
 
 .series-section {
@@ -168,6 +168,19 @@ footer {
   }
   .contact {
     max-width: 80vw;
+  }
+
+  #main-container {
+    margin: 2%;
+    /* border: 1px solid black; */
+    display: flex;
+    direction: column;
+    justify-content: left;
+  }
+  
+
+  .sub-header {
+    width: 100%;
   }
 
 }
