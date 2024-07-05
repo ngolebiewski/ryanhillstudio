@@ -107,13 +107,18 @@ const App = () => {
       <section id="center-container">
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
-          <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
 
       <section id="main-container">
         <Routes>
           {dynamicRoutes}
+        </Routes>
+      </section>
+
+      <section id="center-container">
+        <Routes>
+          <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
     </>
