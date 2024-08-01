@@ -33,7 +33,7 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg";
+    img.src = "/images/site/menu/Drawn-Menu-3.png";
     img.onload = () => {
       setImageDimensions({ width: img.width, height: img.height });
       setIsImageLoaded(true);
@@ -68,6 +68,7 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
         });
       };
 
+      
       setPercentageCoords({
         ryanHill: generatePercentageCoords([104, 174, 160, 583, 339, 566, 368, 597, 511, 551, 550, 558, 594, 438, 655, 416, 714, 526, 856, 551, 853, 593, 888, 575, 922, 509, 1142, 534, 1189, 588, 1235, 473, 1265, 534, 1360, 536, 1458, 548, 1524, 602, 1637, 553, 2053, 607, 2029, 135, 104, 171, 114, 203, 121, 262, 116, 260, 121, 262]),
         drawing: generatePercentageCoords([89, 593, 82, 913, 817, 926, 1076, 928, 1461, 911, 1588, 686, 1470, 558]),
@@ -78,6 +79,21 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
       });
     }
   }, [imageDimensions, imageSize]);
+
+
+{/* NEW NEW NEW NEW
+<map name="image-map">
+    <area target="" alt="About" title="About" href="about" coords="635,148,670,24,1005,28,1001,140" shape="poly">
+    <area target="" alt="Series" title="Series" href="series" coords="658,234,660,155,712,149,1003,139,1039,124,1023,226,846,246" shape="poly">
+    <area target="" alt="Installation" title="Installation" href="installation" coords="789,332,783,243,992,225,1472,210,1461,316" shape="poly">
+    <area target="" alt="Studio" title="Studio" href="studio" coords="890,427,907,327,1150,325,1282,323,1268,405,1112,423" shape="poly">
+    <area target="" alt="Events" title="Events" href="events" coords="905,509,917,429,1352,402,1337,481,1293,495" shape="poly">
+    <area target="" alt="Contact" title="Contact" href="contact" coords="881,584,876,513,1316,493,1370,481,1359,586" shape="poly">
+    <area target="" alt="commission" title="commission" href="commissions" coords="828,668,826,590,1450,565,1446,692" shape="poly">
+</map>
+NEW NEW NEW NEW NEW NEW */}
+
+
 
   const handlePointerDown = (event, soundKey) => {
     if (event.pointerType === 'touch' || event.pointerType === 'pen') {
@@ -114,7 +130,7 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
       {isImageLoaded && (
         <img
           ref={imgRef}
-          src="https://api.ryanhill.studio/wp-content/uploads/2024/05/ryan_menu_01.jpg"
+          src="/images/site/menu/Drawn-Menu-3.png"
           useMap="#image-map"
           style={{ maxHeight: "85vh" }}
         />
@@ -130,6 +146,7 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
           <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" onMouseOver={() => handleAreaMouseOver('contact')} onPointerEnter={() => handleAreaMouseOver('contact')} />
         </map>
       )}
+
     </>
   );
 };
