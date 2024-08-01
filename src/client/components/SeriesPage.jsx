@@ -60,6 +60,7 @@ const SeriesPage = () => {
                 ) : (
                   <p>No image available</p>
                 )}
+                <div className="art-title" dangerouslySetInnerHTML={{ __html: artwork.title.rendered }} />
                 <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
               </div>
             );

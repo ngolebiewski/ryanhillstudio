@@ -84,7 +84,7 @@ const Page = ({ parentPage, setParentPage }) => {
               <SeriesCard seriesData={seriesData} seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} />
             </div>
           ))
-
+          
         ) : (
           // <h1>Loading the series from this project...</h1>
           null
@@ -92,22 +92,28 @@ const Page = ({ parentPage, setParentPage }) => {
       </div>
 
       <div>
+
+
+{/* Render series cards only if there are children */}
+{console.log("About to render button")}
+{currentPageObject.children && (
+  
+  <>
+  {console.log("There are kids")}
+    <p>Yo!</p>
+    {currentPageObject.children.map((seriesData) => (
+      <button onClick={() => handleButtonClick(seriesData.id)}>Child {seriesData.id}</button>
+    ))}
+  </>
+)}
+
+
+      </div>
+
+      <div>
         <SeriesPage seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} description={seriesDescription[seriesFocus]} />
       </div>
-      {/* 
-      <div>
-        {pageImages.length > 0 ? (
-          pageImages.map((pic) => (
-            <div key={pic.id}>
-              <img src={pic.link} alt={pic.alt_text} style={{ maxHeight: "50vh" }} />
-              <p>{pic.title.rendered}</p>
-              <div dangerouslySetInnerHTML={{ __html: pic.caption.rendered }} />
-            </div>
-          ))
-        ) : (
-          <></>
-        )}
-      </div> */}
+      
     </div>
   );
 };
