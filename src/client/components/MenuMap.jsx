@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Howl, Howler } from 'howler';
 import { SoundOutlined, SoundFilled } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
+import * as Tone from 'tone';
 
 const sounds = {
   ryanHill: new Howl({ src: ["/sounds/site/Moog_FX_28.wav"], volume: 0.2 }),
@@ -11,6 +12,38 @@ const sounds = {
   studio: new Howl({ src: ["/sounds/site/Moog_Brass_A4.wav"], volume: 0.1 }),  
   contact: new Howl({ src: ["/sounds/site/Moog_String_C2.wav"], volume: 0.1 }),    
 }
+
+const tremolo = new Tone.Tremolo({
+  frequency: 60, 
+  depth: 0.6,   // Depth of the effect (0-1)
+  spread: 180,  // Stereo spread of the effect
+}).start();      // Start the tremolo effect
+
+const bassSynth = new Tone.MonoSynth({
+  oscillator: { type: 'sawtooth' },
+  filter: { type: 'lowpass', frequency: 150, Q: 8 },
+  envelope: { attack: 0.01, decay: 0.1, sustain: 0.6, release: 0.5 }
+}).connect(tremolo).toDestination();
+
+const spacePad = new Tone.PolySynth({
+  oscillator: { type: 'sawtooth' },
+  filter: { type: 'lowpass', frequency: 600, Q: 5 },
+  envelope: { attack: 1, decay: 1, sustain: 0.5, release: 2 }
+}).connect(tremolo).toDestination(); 
+
+const modulatedBass = new Tone.MonoSynth({
+  oscillator: { type: 'fmsquare', modulationType: 'sawtooth', modulationIndex: 2, harmonicity: 4.5 },
+  filter: { type: 'lowpass', frequency: 100, Q: 12 },
+  envelope: { attack: 0.05, decay: 0.2, sustain: 0.6, release: 1.5 }
+}).toDestination();
+
+const evolvingNoisePad = new Tone.NoiseSynth({
+  noise: { type: 'pink' },
+  filter: { type: 'lowpass', frequency: 200, Q: 4 },
+  envelope: { attack: 4, decay: 1.5, sustain: 0.3, release: 2 }
+}).toDestination();
+
+
 
 const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
   const imgRef = useRef(null);
@@ -26,6 +59,22 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
       });
     }
   };
+
+  const playSpacePad = () => {
+    spacePad.triggerAttackRelease(['C2', 'E3', 'G4'], '2n');
+  };
+  
+  const playBassSynth= () => {
+    spacePad.triggerAttackRelease(['A1'], '4n');
+  };
+  
+  const playModulatedBass= () => {
+    modulatedBass.triggerAttackRelease('C1', '4n'); 
+  }
+
+  const playEvolvingNoisePad= () => {
+    evolvingNoisePad.triggerAttackRelease('3m'); 
+  }
 
   const toggleSound = () => {
     setIsSoundOn(prevState => !prevState);
@@ -146,6 +195,11 @@ NEW NEW NEW NEW NEW NEW */}
           <area target="" alt="Contact" title="Contact" href="contact" coords={percentageCoords.contact} shape="poly" onMouseOver={() => handleAreaMouseOver('contact')} onPointerEnter={() => handleAreaMouseOver('contact')} />
         </map>
       )}
+{/*       
+      <button onClick={playSpacePad}>Play Space Pad</button>
+      <button onClick={playBassSynth}>Bass Synth</button>
+      <button onClick={playModulatedBass}>Modulated Bass Synth</button>
+      <button onClick={playEvolvingNoisePad}>Evolving Noise Pad</button> */}
 
     </>
   );
