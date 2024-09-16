@@ -96,6 +96,7 @@ const Page = ({ parentPage, setParentPage }) => {
 
 {/* Render series cards only if there are children */}
 {console.log("About to render button")}
+***
 {currentPageObject.children && (
   
   <>
@@ -111,7 +112,6 @@ const Page = ({ parentPage, setParentPage }) => {
       </div>
 
       <div>
-        **SERIESPAGE**
         <SeriesPage seriesFocus={seriesFocus} setSeriesFocus={setSeriesFocus} description={seriesDescription[seriesFocus]} />
       </div>
       

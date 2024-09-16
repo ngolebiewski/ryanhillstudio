@@ -78,61 +78,62 @@ const SeriesPage = () => {
 
   return (
     <>
-      {imageHash && imageHash.length < 1?
-      <div></div>:
-      <div
-        className="relative w-full h-screen bg-white overflow-hidden"
-        {...handlers}
-      >
-        {isLoading ? (
-          <p className="text-gray-800 text-center mt-4">Loading images...</p>
-        ) : imageHash && imageHash.length > 0 ? (
-          <div className="flex flex-col items-center justify-center h-full w-full">
-            {/* Image Section */}
-            <div className="relative flex-grow w-full flex items-center justify-center">
-              <img
-                src={currentImage.media_details.sizes.large?.source_url ||
-                  currentImage.media_details.sizes.medium?.source_url ||
-                  currentImage.media_details.sizes.thumbnail?.source_url}
-                alt={currentImage.alt_text}
-                className="object-contain w-full max-h-[80vh]"  // Set max height to 80% of viewport height
-              />
-              {/* Previous Button */}
-              {currentIndex > 0 && (
-                <button
-                  onClick={handlePrevious}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
-                >
-                  &lt;
-                </button>
-              )}
-              {/* Next Button */}
-              {currentIndex < imageHash.length - 1 && (
-                <button
-                  onClick={handleNext}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
-                >
-                  &gt;
-                </button>
-              )}
-            </div>
+      {imageHash && imageHash.length < 1 ?
+        <div></div>
+        :
+        <div
+          className="relative w-full h-screen bg-white overflow-hidden"
+          {...handlers}
+        >
+          {isLoading ? (
+            <p className="text-gray-800 text-center mt-4">Loading images...</p>
+          ) : imageHash && imageHash.length > 0 ? (
+            <div className="flex flex-col items-center justify-center h-full w-full">
+              {/* Image Section */}
+              <div className="relative flex-grow w-full flex items-center justify-center">
+                <img
+                  src={currentImage.media_details.sizes.large?.source_url ||
+                    currentImage.media_details.sizes.medium?.source_url ||
+                    currentImage.media_details.sizes.thumbnail?.source_url}
+                  alt={currentImage.alt_text}
+                  className="object-contain w-full max-h-[80vh]"  // Set max height to 80% of viewport height
+                />
+                {/* Previous Button */}
+                {currentIndex > 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
+                  >
+                    &lt;
+                  </button>
+                )}
+                {/* Next Button */}
+                {currentIndex < imageHash.length - 1 && (
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
+                  >
+                    &gt;
+                  </button>
+                )}
+              </div>
 
-            {/* Caption Section */}
-            <div className="text-center mt-4 px-4">
-              <div
-                className="art-title mb-2 text-lg font-semibold"
-                dangerouslySetInnerHTML={{ __html: currentImage.title.rendered }}
-              />
-              <div
-                className="art-caption text-gray-700"
-                dangerouslySetInnerHTML={{ __html: currentImage.caption.rendered }}
-              />
+              {/* Caption Section */}
+              <div className="text-center mt-2 px-4">
+                <div
+                  className="art-title mb-2 text-lg font-semibold"
+                  dangerouslySetInnerHTML={{ __html: currentImage.title.rendered }}
+                />
+                <div
+                  className="art-caption text-gray-700"
+                  dangerouslySetInnerHTML={{ __html: currentImage.caption.rendered }}
+                />
+              </div>
             </div>
-          </div>
-        ) : (
-          <p className="text-gray-800 text-center mt-4">No images found.</p>
-        )}
-      </div>}
+          ) : (
+            <p className="text-gray-800 text-center mt-4">Loading images...</p>
+          )}
+        </div>}
     </>
   );
 };
