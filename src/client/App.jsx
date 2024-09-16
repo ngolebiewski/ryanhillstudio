@@ -99,25 +99,19 @@ const App = () => {
       <div id="nav">
         <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
         <Header setParentPage={setParentPage} />
-        {/* <SoundMachine /> */}
         <Socials />
       </div>
 
       <section id="center-container">
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
+          <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
 
       <section id="main-container">
         <Routes>
           {dynamicRoutes}
-        </Routes>
-      </section>
-
-      <section id="center-container">
-        <Routes>
-          <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
         </Routes>
       </section>
     </>

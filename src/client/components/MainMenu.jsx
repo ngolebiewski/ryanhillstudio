@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const convertHierarchyToMenuItems = (pages, setParentPage, parentPath = '', level = 0) => {
   return pages.map((page) => {
     const hasChildren = page.children && page.children.length > 0;
-    const itemStyle = { paddingLeft: `${level * 20}px` }; // Adjust indentation as needed
+    const itemStyle = { paddingLeft: `${level * 20}px` }; // Adjust indentation
     const formattedTitle = page.title.rendered.replace(/\s+/g, '-').toLowerCase(); // Format title for URL
     const fullPath = `${parentPath}/${formattedTitle}`; // Include parent path
 
@@ -31,14 +31,12 @@ const convertHierarchyToMenuItems = (pages, setParentPage, parentPath = '', leve
 
 const MainMenu = ({ parentPage, setParentPage }) => {
   const menuPageHierarchy = useSelector((state) => state.pages.pageHierarchy);
-
+  console.log('menu page hieracrcy reducer state: ', menuPageHierarchy)
   const items = convertHierarchyToMenuItems(menuPageHierarchy, setParentPage);
 
   return (
     <div>
-      <Dropdown
-        menu={{ items }} // Replaced `overlay` with `menu`
-      >
+      <Dropdown menu={{ items }}>
         <a onClick={(e) => e.preventDefault()}>
           <Space>
             <MenuOutlined />
