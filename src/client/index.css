@@ -142,6 +142,8 @@ h1 {
 
 #main-container {
   margin: 0 10vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   direction: column;
   justify-content: left;
@@ -149,6 +151,8 @@ h1 {
 
 #center-container {
   margin: 0 1vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   direction: column;
   justify-content: center;
@@ -235,21 +239,6 @@ h1 {
   margin: 10px;
 }
 
-/* ------------------------------------ */
-
-.custom-carousel .slick-prev,
-.custom-carousel .slick-next {
-  color: black; /* Change arrow color to black */
-}
-/* 
-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-} */
 
 @media screen and (max-width: 800px) {
   .big-art {

@@ -1,73 +1,126 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
 import { updateImageInHash } from "../redux/pageSlice";
+import { useSwipeable } from 'react-swipeable';
 
 const SeriesPage = () => {
   const baseURL = import.meta.env.VITE_API;
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pages.currentPage);
-  
-  // Ensure `seriesFocus` is computed only if `page` and `page.title` are defined
-  const seriesFocus = page && page.title ? page.title.rendered.replace(/\s+/g, '-').toLowerCase() : null;
-  
-  // Access the image hash from the state using seriesFocus
+  const seriesFocus = page?.title?.rendered.replace(/\s+/g, '-').toLowerCase();
   const imageHash = useSelector((state) => state.pages.imageHash[seriesFocus]);
-  console.log("series focus", seriesFocus);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const { data } = await axios.get(`${baseURL}/media?search=series-${seriesFocus}`);
-        console.log(seriesFocus)
-
-        // Sort data based on number after series name within the media description, e.g., "series-sketches-10"
         const regex = new RegExp(`series-${seriesFocus}-(\\d+)[^0-9]`);
-        data.sort((a, b) => {
-          const aMatch = a.description.rendered.match(regex);
-          const bMatch = b.description.rendered.match(regex);
-          const aNum = aMatch ? parseInt(aMatch[1], 10) : 0;
-          const bNum = bMatch ? parseInt(bMatch[1], 10) : 0;
+        const sortedImages = data.sort((a, b) => {
+          const aNum = parseInt(a.description.rendered.match(regex)?.[1] || 0, 10);
+          const bNum = parseInt(b.description.rendered.match(regex)?.[1] || 0, 10);
           return aNum - bNum;
         });
 
-        dispatch(updateImageInHash({ seriesKey: seriesFocus, images: data }));
+        dispatch(updateImageInHash({ seriesKey: seriesFocus, images: sortedImages }));
       } catch (error) {
         console.error("Error obtaining images from the server.", error);
       }
     };
 
-    // Fetch images only if they are not already in the imageHash
     if (seriesFocus && !imageHash) {
       fetchImages();
     }
   }, [baseURL, seriesFocus, dispatch, imageHash]);
 
-  return (
-    <div className="series-page">
-      {imageHash ? (
-        <div className="series-images">
-          {imageHash.map((artwork) => {
-            // Use large size if available, otherwise fallback to medium or thumbnail
-            const imageUrl = artwork.media_details.sizes.large?.source_url ||
-                             artwork.media_details.sizes.medium?.source_url ||
-                             artwork.media_details.sizes.thumbnail?.source_url;
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (event.key === "ArrowRight") {
+        handleNext();
+      } else if (event.key === "ArrowLeft") {
+        handlePrevious();
+      }
+    };
 
-            return (
-              <div key={artwork.id} className="series-image">
-                {imageUrl ? (
-                  <img src={imageUrl} alt={artwork.alt_text} />
-                ) : (
-                  <p>No image available</p>
-                )}
-                <div className="art-title" dangerouslySetInnerHTML={{ __html: artwork.title.rendered }} />
-                <div dangerouslySetInnerHTML={{ __html: artwork.caption.rendered }} />
-              </div>
-            );
-          })}
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, [currentIndex, imageHash]);
+
+  const handleNext = () => {
+    if (imageHash && currentIndex < imageHash.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const currentImage = imageHash && imageHash[currentIndex];
+
+  // Swipeable configuration
+  const handlers = useSwipeable({
+    onSwipedLeft: () => handleNext(),
+    onSwipedRight: () => handlePrevious(),
+    delta: 10, // minimum distance (in pixels) to detect a swipe
+  });
+
+  return (
+    <div
+      className="relative w-full h-screen bg-white overflow-hidden"
+      {...handlers}
+    >
+      {currentImage ? (
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          {/* Image Section */}
+          <div className="relative flex-grow w-full flex items-center justify-center">
+            <img
+              src={currentImage.media_details.sizes.large?.source_url ||
+                   currentImage.media_details.sizes.medium?.source_url ||
+                   currentImage.media_details.sizes.thumbnail?.source_url}
+              alt={currentImage.alt_text}
+              className="object-contain w-full max-h-[80vh]"  // Set max height to 80% of viewport height
+            />
+            {/* Previous Button */}
+            {currentIndex > 0 && (
+              <button
+                onClick={handlePrevious}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
+              >
+                &lt;
+              </button>
+            )}
+            {/* Next Button */}
+            {currentIndex < imageHash.length - 1 && (
+              <button
+                onClick={handleNext}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black text-3xl"
+              >
+                &gt;
+              </button>
+            )}
+          </div>
+
+          {/* Caption Section */}
+          <div className="text-center mt-4 px-4">
+            <div
+              className="art-title mb-2 text-lg font-semibold"
+              dangerouslySetInnerHTML={{ __html: currentImage.title.rendered }}
+            />
+            <div
+              className="art-caption text-gray-700"
+              dangerouslySetInnerHTML={{ __html: currentImage.caption.rendered }}
+            />
+          </div>
         </div>
       ) : (
-        <p>Loading images...</p>
+        <p className="text-gray-800 text-center">Loading images...</p>
       )}
     </div>
   );
