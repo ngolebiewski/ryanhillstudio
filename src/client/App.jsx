@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MenuMap from "./components/MenuMap";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Socials from "./components/Socials";
 import { useState, useEffect } from "react";
 import Page from "./components/Page";
 import Home from "./components/Home";
@@ -100,7 +100,7 @@ const App = () => {
         <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
         <Header setParentPage={setParentPage} />
         {/* <SoundMachine /> */}
-        <Footer />
+        <Socials />
       </div>
 
       <section id="center-container">

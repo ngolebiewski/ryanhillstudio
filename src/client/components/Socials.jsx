@@ -5,15 +5,15 @@ import {
 import { Space } from 'antd';
 
 
-const Footer = () => {
+const Socials = () => {
   return (
-    <footer>
+    <>
       <Space>
         <a href="https://www.instagram.com/ryanhillstudios/" target="_blank"><InstagramOutlined style={{ width: '1.5em', fontSize: '1.5em'  }}/></a>
         <a href="mailto:contact@ryanhill.studio"><MailOutlined style={{ width: '1.5em', fontSize: '1.5em'  }} /></a>
       </Space>
-    </footer>
+    </>
   )
 }
 
-export default Footer;
+export default Socials;
