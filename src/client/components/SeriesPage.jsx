@@ -91,13 +91,26 @@ const SeriesPage = () => {
             <div className="flex flex-col items-center justify-center h-full w-full">
               {/* Image Section */}
               <div className="relative flex-grow w-full flex items-center justify-center">
-                <img
-                  src={currentImage.media_details.sizes.large?.source_url ||
-                    currentImage.media_details.sizes.medium?.source_url ||
-                    currentImage.media_details.sizes.thumbnail?.source_url}
-                  alt={currentImage.alt_text}
-                  className="object-contain max-h-[80vh]"  // Set max height to 80% of viewport height
-                />
+                {currentImage.mime_type === 'video/mp4' ? (
+                  <video
+                    controls
+                    className="object-contain max-h-[80vh]"  // Set max height to 80% of viewport height
+                  >
+                    <source src={currentImage.source_url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={
+                      currentImage.media_details.sizes.large?.source_url ||
+                      currentImage.media_details.sizes.medium?.source_url ||
+                      currentImage.media_details.sizes.thumbnail?.source_url
+                    }
+                    alt={currentImage.alt_text}
+                    className="object-contain max-h-[80vh]"  // Set max height to 80% of viewport height
+                  />
+                )}
+
                 {/* Previous Button */}
                 {currentIndex > 0 && (
                   <button
@@ -107,6 +120,7 @@ const SeriesPage = () => {
                     &lt;
                   </button>
                 )}
+
                 {/* Next Button */}
                 {currentIndex < imageHash.length - 1 && (
                   <button
@@ -117,6 +131,7 @@ const SeriesPage = () => {
                   </button>
                 )}
               </div>
+
 
               {/* Caption Section */}
               <div className="text-center mt-2 px-4">
