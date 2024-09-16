@@ -11,6 +11,8 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
   const baseURL = import.meta.env.VITE_API;
   const navigate = useNavigate()
 
+
+
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -35,19 +37,19 @@ const SeriesCard = ({ seriesData, seriesFocus, setSeriesFocus }) => {
     console.log(seriesFocus);
     navigate(`/series/${seriesData.slug}`);
   };
-
+  console.log("series card Page !!!!!!!")
   return (
     <div onClick={handleSeriesClick}>
       <h1>{seriesData.slug.toUpperCase().replaceAll("-"," ")}</h1>
       
-      {/* {featuredImage ? (
+      {featuredImage ? (
         <img className="series-card-image" src={featuredImage.url} alt={featuredImage.alt_text} />
       ) : (
         <h1>Featured Image Loading...</h1>
-      )} */}
+      )}
 
-      {/* <p>Image number: {seriesData.featured_media}</p> */}
-      {/* {seriesFocus===seriesData.slug? <SeriesPage /> : null} */}
+      <p>Image number: {seriesData.featured_media}</p>
+      {seriesFocus===seriesData.slug? <SeriesPage /> : null}
     </div>
   )
 }

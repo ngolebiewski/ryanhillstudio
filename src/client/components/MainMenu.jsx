@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { MenuOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 import { useSelector } from 'react-redux';
 
 // Helper function to convert page hierarchy to Ant Design dropdown items with indentation
@@ -37,7 +37,7 @@ const MainMenu = ({ parentPage, setParentPage }) => {
   return (
     <div>
       <Dropdown
-        overlay={<Menu items={items} />}
+        menu={{ items }} // Replaced `overlay` with `menu`
       >
         <a onClick={(e) => e.preventDefault()}>
           <Space>
