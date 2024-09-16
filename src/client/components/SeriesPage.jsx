@@ -78,7 +78,7 @@ const SeriesPage = () => {
 
   return (
     <>
-      {imageHash && imageHash.length < 1?
+      {imageHash && imageHash.length < 1status?
       <div></div>:
       <div
         className="relative w-full h-screen bg-white overflow-hidden"
