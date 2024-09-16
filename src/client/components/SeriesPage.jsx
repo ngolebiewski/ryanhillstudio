@@ -82,7 +82,7 @@ const SeriesPage = () => {
         <div></div>
         :
         <div
-          className="relative w-full h-screen bg-white overflow-hidden"
+          className="relative w-full h-70vh bg-white overflow-hidden"
           {...handlers}
         >
           {isLoading ? (
@@ -96,7 +96,7 @@ const SeriesPage = () => {
                     currentImage.media_details.sizes.medium?.source_url ||
                     currentImage.media_details.sizes.thumbnail?.source_url}
                   alt={currentImage.alt_text}
-                  className="object-contain w-full max-h-[80vh]"  // Set max height to 80% of viewport height
+                  className="object-contain max-h-[80vh]"  // Set max height to 80% of viewport height
                 />
                 {/* Previous Button */}
                 {currentIndex > 0 && (
@@ -125,7 +125,7 @@ const SeriesPage = () => {
                   dangerouslySetInnerHTML={{ __html: currentImage.title.rendered }}
                 />
                 <div
-                  className="art-caption text-gray-700"
+                  className="art-caption mb-4 text-gray-700"
                   dangerouslySetInnerHTML={{ __html: currentImage.caption.rendered }}
                 />
               </div>
