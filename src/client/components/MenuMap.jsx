@@ -17,8 +17,17 @@ const sounds = {
 const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
   const navigate = useNavigate();
 
+  const playRandomSound = () => {
+    const soundKeys = Object.keys(sounds);  // Get the keys of the sounds object
+    const randomKey = soundKeys[Math.floor(Math.random() * soundKeys.length)];  // Select a random key
+    sounds[randomKey].play();  // Play the randomly selected sound
+  };
+
   const toggleSound = () => {
-    setIsSoundOn(prevState => !prevState);
+    setIsSoundOn(prevState => !prevState);  // Toggle the sound state
+    if (!isSoundOn) {  // If sound is currently off, play a random sound when toggled on
+      playRandomSound();
+    }
   };
 
   const handleAreaMouseOver = (soundKey, pressure = 0.1) => {
