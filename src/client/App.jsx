@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import MenuMap from "./components/MenuMap";
 import Header from "./components/Header";
 import Socials from "./components/Socials";
 import { useState, useEffect } from "react";
@@ -7,7 +6,6 @@ import Page from "./components/Page";
 import Home from "./components/Home";
 import Studio from "./components/Studio";
 import MainMenu from "./components/MainMenu";
-import SoundMachine from "./components/SoundMachine";
 import axios from "axios";
 import { updatePages, resetPages, setPageHierarchy } from "./redux/pageSlice";
 import { useSelector, useDispatch } from 'react-redux';
