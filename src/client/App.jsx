@@ -9,6 +9,7 @@ import MainMenu from "./components/MainMenu";
 import axios from "axios";
 import { updatePages, resetPages, setPageHierarchy } from "./redux/pageSlice";
 import { useSelector, useDispatch } from 'react-redux';
+import NotFound from "./components/NotFound"; // Import NotFound component
 
 const App = () => {
   const baseURL = import.meta.env.VITE_API;
@@ -17,7 +18,7 @@ const App = () => {
   const sitePages = useSelector((state) => state.pages.sitePages);
   const menuPageHierarchy = useSelector((state) => state.pages.pageHierarchy);
 
-  // Get dynamic page data from API
+  // Fetch dynamic page data from API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,18 +104,10 @@ const App = () => {
       <section id="center-container">
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
-        </Routes>
-      </section>
-
-      <section id="main-container">
-        <Routes>
           {dynamicRoutes}
-        </Routes>
-      </section>
-
-      <section id="center-container">
-        <Routes>
           <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
+          {/* Fallback 404 Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </section>
     </>
