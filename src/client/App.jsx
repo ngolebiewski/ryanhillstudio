@@ -1,17 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import MenuMap from "./components/MenuMap";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ArtMenu from "./components/ArtMenu";
+import Socials from "./components/Socials";
 import { useState, useEffect } from "react";
 import Page from "./components/Page";
 import Home from "./components/Home";
 import Studio from "./components/Studio";
 import MainMenu from "./components/MainMenu";
-import SoundMachine from "./components/SoundMachine";
 import axios from "axios";
 import { updatePages, resetPages, setPageHierarchy } from "./redux/pageSlice";
 import { useSelector, useDispatch } from 'react-redux';
+import NotFound from "./components/NotFound"; // Import NotFound component
 
 const App = () => {
   const baseURL = import.meta.env.VITE_API;
@@ -20,7 +18,7 @@ const App = () => {
   const sitePages = useSelector((state) => state.pages.sitePages);
   const menuPageHierarchy = useSelector((state) => state.pages.pageHierarchy);
 
-  // Get dynamic page data from API
+  // Fetch dynamic page data from API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -100,25 +98,16 @@ const App = () => {
       <div id="nav">
         <MainMenu parentPage={parentPage} setParentPage={setParentPage} />
         <Header setParentPage={setParentPage} />
-        {/* <SoundMachine /> */}
-        <Footer />
+        <Socials />
       </div>
 
       <section id="center-container">
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
-        </Routes>
-      </section>
-
-      <section id="main-container">
-        <Routes>
           {dynamicRoutes}
-        </Routes>
-      </section>
-
-      <section id="center-container">
-        <Routes>
           <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
+          {/* Fallback 404 Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </section>
     </>
