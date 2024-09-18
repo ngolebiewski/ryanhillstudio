@@ -16,7 +16,7 @@ const NotFound = () => {
   return (
     <div className="not-found-container">
       <h1 style={{ color: `hsl(${color}, 100%, 50%)` }}>
-        Page not found:<br />This artwork doesn't exist
+        404 error: Page not found<br /><hr />This artwork doesn't exist
       </h1>
     </div>
   );
