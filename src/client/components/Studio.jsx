@@ -41,6 +41,8 @@ const Studio = ({ parentPage }) => {
     };
 
     fetchPosts();
+    console.log("fetching posts")
+    console.log(posts)
   }, [baseURL, parentPage]);
 
   return (

@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage, resetCurrentPage } from "../redux/pageSlice";
 import { Link } from "react-router-dom";
+import Studio from "./Studio";
 
 // Utility function to convert page titles into slugs
 const slugify = (title) => {
@@ -94,7 +95,10 @@ const Page = ({ parentPage, setParentPage }) => {
           <div dangerouslySetInnerHTML={{ __html: currentPageObject.content.rendered }} />
         )}
       </div>
-
+      
+      {slugify(currentPageObject.title.rendered)==='studio' ?
+        <Studio />:null
+      }
       <div>
         <SeriesPage
           seriesFocus={seriesFocus}

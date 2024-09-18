@@ -105,7 +105,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home parentPage={"home"} setParentPage={setParentPage} />} />
           {dynamicRoutes}
-          <Route path="/studio/*" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
+          <Route path="/studio" element={<Studio parentPage={"studio"} setParentPage={setParentPage} />} />
           {/* Fallback 404 Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
