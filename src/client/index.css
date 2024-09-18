@@ -244,7 +244,8 @@ h1 {
     height: 60vh;
   }
   .contact {
-    max-width: 80vw;
+    width: 100%;
+    /* max-width: 80vw; */
   }
 
   #main-container {
