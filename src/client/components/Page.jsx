@@ -77,7 +77,7 @@ const Page = ({ parentPage, setParentPage }) => {
             <div className="child-pages">
               {childPages.map((child) => (
                 <Link
-                  to={`/${slugify(currentPageObject.title.rendered)}/${slugify(child.title.rendered)}`}
+                  to={`${window.location.pathname}/${slugify(child.title.rendered)}`}
                   key={child.id}
                 >
                   <button
