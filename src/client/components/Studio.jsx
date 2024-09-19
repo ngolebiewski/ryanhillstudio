@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DateFormatter from "./DateFormatter";
+import Spinner from "./Spinner";
 
 const Studio = ({ parentPage }) => {
   const baseURL = import.meta.env.VITE_API;
@@ -50,7 +51,7 @@ const Studio = ({ parentPage }) => {
   return (
     <div className="series-section">
       {loading ? (
-        <h1>Loading Studio Posts...</h1>
+        <Spinner />
       ) : error ? (
         <h1>{error}</h1>
       ) : posts.length > 0 ? (

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
 import { updateImageInHash } from "../redux/pageSlice";
 import { useSwipeable } from 'react-swipeable';
+import Spinner from "./Spinner";
 
 const SeriesPage = () => {
   const baseURL = import.meta.env.VITE_API;
@@ -146,7 +147,7 @@ const SeriesPage = () => {
               </div>
             </div>
           ) : (
-            <p className="text-gray-800 text-center mt-4">Loading images...</p>
+            <Spinner />
           )}
         </div>}
     </>
