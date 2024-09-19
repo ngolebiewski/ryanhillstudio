@@ -96,9 +96,10 @@ const Page = ({ parentPage, setParentPage }) => {
         )}
       </div>
       
-      {slugify(currentPageObject.title.rendered)==='studio' ?
-        <Studio />:null
+      {(currentPageObject.content && (slugify(currentPageObject.title.rendered)==='studio'))? 
+      <Studio />:null
       }
+
       <div>
         <SeriesPage
           seriesFocus={seriesFocus}
