@@ -73,43 +73,43 @@ const MenuMap = ({ isSoundOn, setIsSoundOn }) => {
           <image href="/images/site/menu/Drawn-Menu-3.png" width="2024" height="766" />
           <polygon
             points="635,148 670,24 1005,28 1001,140"
-            fill="#FF000080"
+            fill="#9799ad80"
             onMouseOver={() => handleAreaMouseOver('about')}
             onClick={() => handleAreaClick('about')}
           />
           <polygon
             points="658,234 660,155 712,149 1003,139 1039,124 1023,226 846,246"
-            fill="#FFA50080"
+            fill="#dbb36980"
             onMouseOver={() => handleAreaMouseOver('series')}
             onClick={() => handleAreaClick('series')}
           />
           <polygon
             points="789,332 783,243 992,225 1472,210 1461,316"
-            fill="#FFFF0080"
+            fill="#e39db280"
             onMouseOver={() => handleAreaMouseOver('installation')}
             onClick={() => handleAreaClick('installation')}
           />
           <polygon
             points="890,427 907,327 1150,325 1282,323 1268,405 1112,423"
-            fill="#00800080"
+            fill="#79bdbd80"
             onMouseOver={() => handleAreaMouseOver('studio')}
             onClick={() => handleAreaClick('studio')}
           />
           <polygon
             points="905,509 917,429 1352,402 1337,481 1293,495"
-            fill="#0000FF80"
+            fill="#dbb36980"
             onMouseOver={() => handleAreaMouseOver('events')}
             onClick={() => handleAreaClick('events')}
           />
           <polygon
             points="881,584 876,513 1316,493 1370,481 1359,586"
-            fill="#80008080"
+            fill="#9c999780"
             onMouseOver={() => handleAreaMouseOver('contact')}
             onClick={() => handleAreaClick('contact')}
           />
           <polygon
             points="828,668 826,590 1450,565 1446,692"
-            fill="#00808080"
+            fill="#cf6b8980"
             onMouseOver={() => handleAreaMouseOver('commission')}
             onClick={() => handleAreaClick('commissions')}
           />
