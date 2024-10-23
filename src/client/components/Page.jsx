@@ -72,21 +72,22 @@ const Page = ({ parentPage, setParentPage }) => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const id = currentPageObject.featured_media // number, i.e. 139
-        if (id === 0){
-          setFeaturedImage(null)
+        const id = currentPageObject.featured_media; // number, i.e. 139
+        if (id === 0 || !id) { // Check if the ID is 0 or falsy
+          setFeaturedImage(null);
+          return; // Exit early if there's no valid ID
         }
         const { data } = await axios.get(`${baseURL}/media/${id}`);
         setFeaturedImage(data);
       } catch (error) {
         console.error("No images to be found.", error);
+        setFeaturedImage(null); // Ensure the image is cleared on error
       }
     };
-
+  
     fetchImage();
-
-  }
-    , [currentPageObject])
+  }, [location, fullPath, currentPageObject]);
+  
 
   // Breadcrumbs component
   const renderBreadcrumbs = () => {
@@ -138,7 +139,7 @@ const Page = ({ parentPage, setParentPage }) => {
           ) : null}
         </div>
 
-        {featuredImage? 
+        {featuredImage && currentPageObject.featured_media !== 0 ? 
       <img src={featuredImage.source_url} alt={featuredImage.alt_text}/>
       :
       null
