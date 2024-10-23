@@ -95,10 +95,11 @@ const Page = ({ parentPage, setParentPage }) => {
   return (
     <div className="sub-container">
       {/* Breadcrumbs at the top */}
-      {renderBreadcrumbs()}
+      {/* {renderBreadcrumbs()} */}
 
       <div className="sub-header">
-        <h1>{parentPage?.toUpperCase()}</h1>
+        {/* <h1>{parentPage?.toUpperCase()}</h1> */}
+        <h1 className="text-[2rem]">{renderBreadcrumbs()}</h1>
 
         <div className="series-section">
           {childPages.length > 0 ? (
