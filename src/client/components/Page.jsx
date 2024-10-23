@@ -31,6 +31,7 @@ const Page = ({ parentPage, setParentPage }) => {
   const [childPages, setChildPages] = useState([]);
   const [seriesFocus, setSeriesFocus] = useState();
   const [seriesDescription, setSeriesDescription] = useState({});
+  const [featuredImage, setFeaturedImage] = useState(null);
 
   useEffect(() => {
     dispatch(resetCurrentPage());
@@ -67,6 +68,25 @@ const Page = ({ parentPage, setParentPage }) => {
 
     fetchImages();
   }, [parentPage, baseURL]);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const id = currentPageObject.featured_media // number, i.e. 139
+        if (id === 0){
+          setFeaturedImage(null)
+        }
+        const { data } = await axios.get(`${baseURL}/media/${id}`);
+        setFeaturedImage(data);
+      } catch (error) {
+        console.error("No images to be found.", error);
+      }
+    };
+
+    fetchImage();
+    console.log(featuredImage)
+  }
+    , [currentPageObject])
 
   // Breadcrumbs component
   const renderBreadcrumbs = () => {
@@ -118,12 +138,18 @@ const Page = ({ parentPage, setParentPage }) => {
           ) : null}
         </div>
 
+        {featuredImage? 
+      <img src={featuredImage.source_url} alt={featuredImage.alt_text}/>
+      :
+      null
+      }
+
         {currentPageObject.content && (
           <div dangerouslySetInnerHTML={{ __html: currentPageObject.content.rendered }} />
         )}
       </div>
 
-      {(currentPageObject.content && (slugify(currentPageObject.title.rendered) === 'studio')) ? 
+      {(currentPageObject.content && (slugify(currentPageObject.title.rendered) === 'studio')) ?
         <Studio /> : null
       }
 
