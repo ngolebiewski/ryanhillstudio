@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SeriesCard from "./SeriesCard";
-import SeriesPage from "./SeriesPage";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage, resetCurrentPage } from "../redux/pageSlice";
-import { Link } from "react-router-dom";
+import SeriesPage from "./SeriesPage";
 import Studio from "./Studio";
 
 // Utility function to convert page titles into slugs
 const slugify = (title) => {
   return title.replace(/\s+/g, '-').toLowerCase();
+};
+
+// Utility function to create readable titles from slugs
+const unslugify = (slug) => {
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
 const Page = ({ parentPage, setParentPage }) => {
@@ -21,13 +24,13 @@ const Page = ({ parentPage, setParentPage }) => {
 
   const location = useLocation();
   const fullPath = location.pathname;
-  const segments = fullPath.split('/');
+  const segments = fullPath.split('/').filter(segment => segment); // Split by "/" and remove empty strings
   const currentPath = segments[segments.length - 1];
 
   const [pageImages, setPageImages] = useState([]);
-  const [childPages, setChildPages] = useState([]); // each an object
-  const [seriesFocus, setSeriesFocus] = useState(); // slug for selected button
-  const [seriesDescription, setSeriesDescription] = useState({}); // hash table for series descriptions
+  const [childPages, setChildPages] = useState([]);
+  const [seriesFocus, setSeriesFocus] = useState();
+  const [seriesDescription, setSeriesDescription] = useState({});
 
   useEffect(() => {
     dispatch(resetCurrentPage());
@@ -44,7 +47,6 @@ const Page = ({ parentPage, setParentPage }) => {
         dispatch(setCurrentPage(matchingPage));
         setParentPage(matchingPage.title.rendered);
 
-        // Find child pages by matching parent ID
         const children = Object.values(sitePages).filter(
           (page) => page.parent === matchingPage.id
         );
@@ -66,12 +68,38 @@ const Page = ({ parentPage, setParentPage }) => {
     fetchImages();
   }, [parentPage, baseURL]);
 
+  // Breadcrumbs component
+  const renderBreadcrumbs = () => {
+    let path = '';
+
+    return (
+      <nav className="breadcrumbs">
+        {segments.map((segment, index) => {
+          path += `/${segment}`;
+          const isLast = index === segments.length - 1;
+          return (
+            <span key={segment}>
+              {!isLast ? (
+                <Link to={path}>{unslugify(segment)}</Link>
+              ) : (
+                <span>{unslugify(segment)}</span>
+              )}
+              {!isLast && ' / '}
+            </span>
+          );
+        })}
+      </nav>
+    );
+  };
+
   return (
     <div className="sub-container">
+      {/* Breadcrumbs at the top */}
+      {renderBreadcrumbs()}
+
       <div className="sub-header">
         <h1>{parentPage?.toUpperCase()}</h1>
 
-        {/* Render child pages if they exist */}
         <div className="series-section">
           {childPages.length > 0 ? (
             <div className="child-pages">
@@ -80,9 +108,7 @@ const Page = ({ parentPage, setParentPage }) => {
                   to={`${window.location.pathname}/${slugify(child.title.rendered)}`}
                   key={child.id}
                 >
-                  <button
-                    className="text-black border border-black  py-1 px-4 rounded mr-2 mb-2 transition duration-300 hover:bg-gray-800 hover:text-white"
-                  >
+                  <button className="text-black border border-black py-1 px-4 rounded mr-2 mb-2 transition duration-300 hover:bg-gray-800 hover:text-white">
                     {child.title.rendered}
                   </button>
                 </Link>
@@ -95,9 +121,9 @@ const Page = ({ parentPage, setParentPage }) => {
           <div dangerouslySetInnerHTML={{ __html: currentPageObject.content.rendered }} />
         )}
       </div>
-      
-      {(currentPageObject.content && (slugify(currentPageObject.title.rendered)==='studio'))? 
-      <Studio />:null
+
+      {(currentPageObject.content && (slugify(currentPageObject.title.rendered) === 'studio')) ? 
+        <Studio /> : null
       }
 
       <div>

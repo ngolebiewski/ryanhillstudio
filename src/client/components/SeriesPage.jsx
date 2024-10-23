@@ -147,7 +147,8 @@ const SeriesPage = () => {
               </div>
             </div>
           ) : (
-            <Spinner />
+            
+            <div><Spinner /></div>
           )}
         </div>}
     </>
