@@ -84,7 +84,7 @@ const Page = ({ parentPage, setParentPage }) => {
     };
 
     fetchImage();
-    console.log(featuredImage)
+
   }
     , [currentPageObject])
 
